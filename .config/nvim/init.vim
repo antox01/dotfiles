@@ -8,6 +8,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 	Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 	Plug 'unblevable/quick-scope'
 call plug#end()
+
 filetype plugin on
 
 set number relativenumber
@@ -15,6 +16,7 @@ syntax on
 set autoindent
 set ignorecase
 set smartcase
+set smartindent
 set incsearch
 set hlsearch
 set encoding=utf-8
@@ -23,8 +25,22 @@ set path+=**
 set wildmenu
 set wildmode=longest,list
 
+set completeopt=menuone,longest
+
 set termguicolors
 colorscheme codedark
+
+" Cursor line
+set cursorline
+set cursorcolumn
+highlight CursorLine ctermbg=Yellow cterm=bold guibg=#2b2b2b
+highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#2b2b2b
+
+" Mapping a better way to move between the splits in vim
+nnoremap <C-l> <C-w>l
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+nnoremap <C-h> <C-w>h
 
 " QuickScope Highlighting
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -77,11 +93,10 @@ function! OpenBelow()
 endfunction
 
 function! NetrwMappings()
-	 noremap <buffer> <A-l> <C-w>l
-	 noremap <buffer> <C-l> <C-w>l
-	 noremap <buffer> <A-l> :call ToggleNetrw()<CR> 
-	 noremap <buffer> V :call OpenToRight()<CR> 
-	 noremap <buffer> V :call OpenBelow()<CR>
+	noremap <buffer> <C-l> <C-w>l
+	noremap <buffer> <A-l> :call ToggleNetrw()<CR> 
+	noremap <buffer> V :call OpenToRight()<CR> 
+	noremap <buffer> V :call OpenBelow()<CR>
 endfunction
 
 augroup netrw_mappings

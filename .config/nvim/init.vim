@@ -1,4 +1,6 @@
 " Basic vim settings
+let mapleader=" "
+
 set nocompatible
 filetype plugin on
 
@@ -38,10 +40,10 @@ highlight CursorLine ctermbg=Yellow cterm=bold guibg=#2b2b2b
 highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#2b2b2b
 
 " Mapping a better way to move between the splits in vim
-nnoremap <C-l> <C-w>l
-nnoremap <C-k> <C-w>k
-nnoremap <C-j> <C-w>j
-nnoremap <C-h> <C-w>h
+nnoremap <Leader>l <C-w>l
+nnoremap <Leader>k <C-w>k
+nnoremap <Leader>j <C-w>j
+nnoremap <Leader>h <C-w>h
 
 " QuickScope Highlighting
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -143,3 +145,6 @@ augroup ProjectDrawer
 augroup END
 
 let g:NetrwIsOpen=0
+
+" Mapping the Netrw toggle keys
+nnoremap <A-l> :call ToggleNetrw()<CR>

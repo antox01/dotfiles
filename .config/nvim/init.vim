@@ -1,14 +1,5 @@
+" Basic vim settings
 set nocompatible
-
-call plug#begin('~/.local/share/nvim/plugged')
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	Plug 'tomasiser/vim-code-dark'
-	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
-	Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
-	Plug 'unblevable/quick-scope'
-call plug#end()
-
 filetype plugin on
 
 set number relativenumber
@@ -26,6 +17,16 @@ set wildmenu
 set wildmode=longest,list
 
 set completeopt=menuone,longest
+
+" Plugin installation
+call plug#begin('~/.local/share/nvim/plugged')
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'tomasiser/vim-code-dark'
+	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
+	Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
+	Plug 'unblevable/quick-scope'
+call plug#end()
 
 set termguicolors
 colorscheme codedark
@@ -66,6 +67,7 @@ let g:Hexokinase_optInPatterns = [
 \     'hsla',
 \     'colour_names'
 \ ]
+
 let g:Hexokinase_highlighters = ['backgroundfull']
 " Reenable hexokinase on enter
 autocmd VimEnter * HexokinaseToggle

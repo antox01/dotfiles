@@ -50,7 +50,7 @@ let g:Hexokinase_optInPatterns = [
 \     'hsla',
 \     'colour_names'
 \ ]
-let g:Hexokinase_highlighters = ['virtual']
+let g:Hexokinase_highlighters = ['backgroundfull']
 " Reenable hexokinase on enter
 autocmd VimEnter * HexokinaseToggle
 
@@ -89,3 +89,40 @@ augroup netrw_mappings
 	autocmd filetype netrw call NetrwMappings()
 augroup END
 
+function! ToggleNetrw()
+	if g:NetrwIsOpen
+		let i = bufnr("$")
+		while (i >= 1)
+			if (getbufvar(i, "&filetype") == "netrw")
+				silent exe "bwipeout " . i
+			endif
+			let i-=1
+		endwhile
+		let g:NetrwIsOpen=0
+	else
+		let g:NetrwIsOpen=1
+		silent Lexplore
+	endif
+endfunction
+
+" Check before opening buffer on any file
+function! NetrwOnBufferOpen()
+	if exists('b:noNetrw')
+		return
+	endif
+	call ToggleNetrw()
+endfunction
+
+" Close Netrw if it's the only buffer open
+autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
+
+augroup ProjectDrawer
+	autocmd!
+	" Don't open Netrw for this files
+	autocmd VimEnter */.git/COMMIT_EDITMSG let b:noNetrw=1
+
+	" For any other files or folder Netrw will be opened
+	autocmd VimEnter * :call NetrwOnBufferOpen()
+augroup END
+
+let g:NetrwIsOpen=0

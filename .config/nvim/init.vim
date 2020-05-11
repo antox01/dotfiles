@@ -96,7 +96,7 @@ function! NetrwMappings()
 	noremap <buffer> <C-l> <C-w>l
 	noremap <buffer> <A-l> :call ToggleNetrw()<CR>
 	noremap <buffer> V :call OpenToRight()<CR>
-	noremap <buffer> V :call OpenBelow()<CR>
+	noremap <buffer> H :call OpenBelow()<CR>
 endfunction
 
 augroup netrw_mappings

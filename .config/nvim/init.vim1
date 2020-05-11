@@ -1,0 +1,135 @@
+set nocompatible                  " Must come first because it changes other options.
+let mapleader = " "               " Want a different map leader than \
+call plug#begin('~/local/share/nvim/plugged')
+	" Themes
+	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
+	Plug 'tomasiser/vim-code-dark'
+	Plug 'unblevable/quick-scope'
+	Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
+	" Autocomplition plugin
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
+syntax enable                     " Turn on syntax highlighting.
+filetype plugin indent on         " Turn on file type detection.
+set termguicolors
+colorscheme codedark
+set showcmd                       " Display incomplete commands.
+set showmode                      " Display the mode you're in.
+set backspace=indent,eol,start    " Intuitive backspacing.
+set hidden                        " Handle multiple buffers better.
+set path+=**
+set wildmenu                      " Enhanced command line completion.
+set wildmode=longest,list       " Complete files like a shell.
+set ignorecase                    " Case-insensitive searching.
+set smartcase                     " But case-sensitive if expression contains a capital letter.
+set number relativenumber                        " Show line numbers.
+set ruler                         " Show cursor position.
+set incsearch                     " Highlight matches as you type.
+set hlsearch                      " Highlight matches.
+set encoding=utf-8
+"nmap <silent> gd <Plug>(coc-definition)
+"nmap <silent> gy <Plug>(coc-type-definition)
+"nmap <silent> gi <Plug>(coc-implementation)
+"nmap <silent> gr <Plug>(coc-references)
+" QuickScope Highlighting
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+"=========== TABS ============
+set ts=4                " Global tabstop
+" set sw=4                " Shiftwidth
+" set expandtab           " Use spaces instead of tabs
+" set laststatus=2        " Show the status line all the time
+"=========== Layout ===========
+" Vim-airline
+let g:airline#extensions#wordcount#enabled = 1
+let g:airline#extensions#hunks#non_zero_only = 1
+let g:airline_theme = 'codedark'
+" Remap ESC to ii
+:imap ii <Esc>
+" Coc settings
+" From Coc Readme
+set updatetime=300
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+" always show signcolumns
+"set signcolumn=yes
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col -1]  =Œ·ŒÂŒı '\s'
+endfunction
+ " Vim Hexokinase
+let g:Hexokinase_refreshEvents = ['InsertLeave']
+let g:Hexokinase_optInPatterns = [
+\     'full_hex',
+\     'triple_hex',
+\     'rgb',
+\     'rgba',
+\     'hsl',
+\     'hsla',
+\     'colour_names'
+\ ]
+let g:Hexokinase_highlighters = ['virtual']
+" Reenable hexokinase on enter
+autocmd VimEnter * HexokinaseToggle
+" Netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 20
+function! OpenToRight()
+	:normal v
+	let g:path=expand('%:p')
+	:q!
+	execute 'belowright vnew' g:path
+	:normal <C-w>l
+endfunction
+function! OpenBelow()
+		:normal v
+		let g:path=expand('%:p')
+		:q!
+		execute 'belowright new' g:path
+		:normal <C-w>l
+endfunction
+function! NetrwMappings()
+		noremap <buffer> <A-l> <C-w>l
+		noremap <buffer> <C-l> <C-w>l
+		noremap <buffer> <A-f> :call ToggleNetrw()<CR>
+		noremap <buffer> V :call OpenToRight()<CR>
+		noremap <buffer> H :call OpenBelow()<CR>
+endfunction
+augroup netw_mappings
+		autocmd!
+		autocmd	filetype netrw call NetrwMappings()
+augroup END
+function! ToggleNetrw()
+		if g:NetrwIsOpen
+				let i = bufnr("$")
+				while (i >= 1)
+						if (getbufvar(i, "&filetype") == "netrw")
+								silent exe "bwipeout " . i	
+						endif
+						let i-=1
+				endwhile
+				let g:NetrwIsOpen=0
+		else
+				let g:NetrwIsOpen=1
+				silent Lexplore
+		endif
+endfunction
+" Check before opening buffer on any file
+function! NetrwOnBufferOpen()
+		if exists('b:noNetrw')
+				return
+		endif
+		call ToggleNetrw()
+endfunction
+" Close Netrw if it's the only buffer open
+autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
+"let g:NetrwIsOpen=0

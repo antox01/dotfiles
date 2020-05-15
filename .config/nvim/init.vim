@@ -33,6 +33,9 @@ call plug#end()
 set termguicolors
 colorscheme codedark
 
+" Importing the settings of coc
+source ~/.config/nvim/plug-config/coc-config.vim
+
 " Cursor line
 set cursorline
 set cursorcolumn

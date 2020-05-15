@@ -1,5 +1,5 @@
 # Define the custom separator in global properties for boilerplate
-command=./scripts/$BLOCK_NAME
+command=~/.config/i3blocks/scripts/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
@@ -10,18 +10,14 @@ interval=15
 interval=2
 
 [volume]
-command=./volume.py
-#background=#fed788
 align=center
-format=json
-signal=1
 interval=once
+signal=10
 
 [time]
 label=📅 
 instance=la
 command=date '+%Y-%m-%d %H:%M:%S'
 interval=1
-#background=#fa8677
 align=center
 

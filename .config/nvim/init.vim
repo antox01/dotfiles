@@ -44,6 +44,8 @@ set cursorcolumn
 highlight CursorLine ctermbg=Yellow cterm=bold guibg=#2b2b2b
 highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#2b2b2b
 
+set splitbelow splitright
+
 " Mapping a better way to move between the splits in vim
 nnoremap <Leader>l <C-w>l
 nnoremap <Leader>k <C-w>k

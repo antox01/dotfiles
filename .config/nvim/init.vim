@@ -20,6 +20,12 @@ set wildmode=longest,list
 
 set completeopt=menuone,longest
 
+" === TAB Settings === "
+set expandtab
+set smarttab
+set shiftwidth=4
+set tabstop=4
+
 " Plugin installation
 call plug#begin('~/.local/share/nvim/plugged')
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}

@@ -44,10 +44,10 @@ highlight CursorLine ctermbg=Yellow cterm=bold guibg=#2b2b2b
 highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#2b2b2b
 
 " Mapping a better way to move between the splits in vim
-nnoremap <C-l> <C-w>l
-nnoremap <C-k> <C-w>k
-nnoremap <C-j> <C-w>j
-nnoremap <C-h> <C-w>h
+nnoremap <leader> <C-w>l
+nnoremap <leader> <C-w>k
+nnoremap <leader> <C-w>j
+nnoremap <leader> <C-w>h
 
 
 " Netrw setting for a better position

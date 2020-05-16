@@ -13,6 +13,7 @@ set smartindent
 set incsearch
 set hlsearch
 set encoding=utf-8
+set clipboard=unnamedplus
 
 set path+=**
 set wildmenu

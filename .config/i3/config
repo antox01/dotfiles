@@ -9,14 +9,11 @@ set $mod Mod4
 font pango:monospace 10 
 
 # Adding gaps to the window
-gaps inner 10
-gaps outer 2
+gaps inner 8
+gaps outer 8
 
-# Removing title bar
+# Setting the border of the windows
 default_border pixel 2
-
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
@@ -183,5 +180,5 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3blocks
-	position top
+        position top
 }

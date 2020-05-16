@@ -26,10 +26,11 @@
 
 import os
 import subprocess
+import re
 
 from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.lazy import lazy
-from libqtile import layout, bar, widget
+from libqtile import layout, bar, widget, hook
 
 from typing import List  # noqa: F401
 
@@ -71,6 +72,11 @@ keys = [
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window"),
     #Toggle the floating mode on a window
     Key([mod, "shift"], "f", lazy.window.toggle_floating(), desc="Toggle floating mode on the focused window"),
+
+    # Change the volume if your keyboard has special volume keys.
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"), desc="Increase the volume"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"), desc="Decrease the volume"),
+    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle"), desc="Toggle the mute on the audio"),
 
     # Mapping another way to move between workspace
     Key([mod], "g", lazy.screen.next_group(), desc="Move to the next qtile group"),
@@ -122,9 +128,17 @@ screens = [
                 widget.GroupBox(),
                 #widget.Prompt(),
                 widget.WindowName(),
-                widget.TextBox("default config", name="default"),
+                #widget.TextBox("default config", name="default"),
+                widget.battery.Battery(
+                    battery=0,
+                    charge_char='🔌',
+                    discharge_char='🔋',
+                    full_char='⚡',
+                    format="{char} {percent:2.0%} {hour:d}:{min:02d}"
+                ),
+                widget.volume.Volume(),
                 widget.Systray(),
-                widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
+                widget.Clock(format='%Y-%m-%d %a %H:%M %p'),
                 widget.QuickExit(),
             ],
             24,
@@ -166,6 +180,13 @@ floating_layout = layout.Floating(float_rules=[
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
+
+##### STARTUP APPLICATIONS #####
+@hook.subscribe.startup_once
+def start_once():
+    home = os.path.expanduser('~')
+    subprocess.call([home + '/.config/qtile/autostart.sh'])
+
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the

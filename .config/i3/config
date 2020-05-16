@@ -6,7 +6,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 10 
+font pango:monospace 10
 
 # Adding gaps to the window
 gaps inner 8
@@ -53,7 +53,7 @@ bindsym --release Mod1+Sys_Req exec "import -window `xwininfo | awk '/.*Window i
 bindsym --release Shift+Print exec "scrot ~/Immagini/Schermata-$(date --iso-8601='seconds').png -s -e 'xclip -selection c -t image/png < $f'"
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec dmenu_run -p "Run: "
 
 # change focus
 bindsym $mod+h focus left

@@ -12,6 +12,9 @@ font pango:monospace 10
 gaps inner 10
 gaps outer 2
 
+# Removing title bar
+default_border pixel 2
+
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 

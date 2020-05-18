@@ -29,12 +29,11 @@ set tabstop=4
 
 " Plugin installation
 call plug#begin('~/.local/share/nvim/plugged')
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	Plug 'tomasiser/vim-code-dark'
-	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
-	"Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
-	Plug 'norcalli/nvim-colorizer.lua'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'tomasiser/vim-code-dark'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'norcalli/nvim-colorizer.lua'
     Plug 'unblevable/quick-scope'
 call plug#end()
 
@@ -47,6 +46,7 @@ source ~/.config/nvim/plug-config/coc-config.vim
 source ~/.config/nvim/plug-config/netrw.vim
 " Importing settings for colorizer
 luafile ~/.config/nvim/lua/plug-colorizer.lua
+
 " Cursor line
 set cursorline
 set cursorcolumn
@@ -79,20 +79,4 @@ let g:airline_theme = 'codedark'
 :imap jk <ESC>
 " Remap ESC to jj
 :imap jj <ESC>
-
-" Vim Hexokinase
-"let g:Hexokinase_refreshEvents = ['InsertLeave']
-"let g:Hexokinase_optInPatterns = [
-"\     'full_hex',
-"\     'triple_hex',
-"\     'rgb',
-"\     'rgba',
-"\     'hsl',
-"\     'hsla',
-"\     'colour_names'
-"\ ]
-"
-"let g:Hexokinase_highlighters = ['backgroundfull']
-"" Reenable hexokinase on enter
-"autocmd VimEnter * HexokinaseToggle
 

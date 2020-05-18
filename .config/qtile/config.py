@@ -134,7 +134,8 @@ screens = [
                     charge_char='🔌',
                     discharge_char='🔋',
                     full_char='⚡',
-                    format="{char} {percent:2.0%} {hour:d}:{min:02d}"
+                    format="{char} {percent:2.0%} {hour:d}:{min:02d}",
+                    update_interval=10
                 ),
                 widget.volume.Volume(),
                 widget.Systray(),

@@ -183,9 +183,9 @@ focus_on_window_activation = "smart"
 
 ##### STARTUP APPLICATIONS #####
 @hook.subscribe.startup_once
-def start_once():
-    home = os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/autostart.sh'])
+def autostart():
+    home = os.path.expanduser('~/.config/qtile/autorun.sh')
+    subprocess.call([home])
 
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this

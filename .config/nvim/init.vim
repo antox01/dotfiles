@@ -33,8 +33,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 	Plug 'tomasiser/vim-code-dark'
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
-	Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
-	Plug 'unblevable/quick-scope'
+	"Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
+	Plug 'norcalli/nvim-colorizer.lua'
+    Plug 'unblevable/quick-scope'
 call plug#end()
 
 set termguicolors
@@ -44,7 +45,8 @@ colorscheme codedark
 source ~/.config/nvim/plug-config/coc-config.vim
 " Importing the settings of Netrw
 source ~/.config/nvim/plug-config/netrw.vim
-
+" Importing settings for colorizer
+luafile ~/.config/nvim/lua/plug-colorizer.lua
 " Cursor line
 set cursorline
 set cursorcolumn
@@ -79,18 +81,18 @@ let g:airline_theme = 'codedark'
 :imap jj <ESC>
 
 " Vim Hexokinase
-let g:Hexokinase_refreshEvents = ['InsertLeave']
-let g:Hexokinase_optInPatterns = [
-\     'full_hex',
-\     'triple_hex',
-\     'rgb',
-\     'rgba',
-\     'hsl',
-\     'hsla',
-\     'colour_names'
-\ ]
-
-let g:Hexokinase_highlighters = ['backgroundfull']
-" Reenable hexokinase on enter
-autocmd VimEnter * HexokinaseToggle
+"let g:Hexokinase_refreshEvents = ['InsertLeave']
+"let g:Hexokinase_optInPatterns = [
+"\     'full_hex',
+"\     'triple_hex',
+"\     'rgb',
+"\     'rgba',
+"\     'hsl',
+"\     'hsla',
+"\     'colour_names'
+"\ ]
+"
+"let g:Hexokinase_highlighters = ['backgroundfull']
+"" Reenable hexokinase on enter
+"autocmd VimEnter * HexokinaseToggle
 

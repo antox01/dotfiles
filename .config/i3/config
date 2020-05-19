@@ -46,11 +46,11 @@ bindsym $mod+Return exec termite
 bindsym $mod+Shift+q kill
 
 # Desktop screenshot
-bindsym --release Print exec "scrot ~/Immagini/scrot-$(date --iso-8601='seconds').png -m -e 'xclip -selection c -t image/png < $f'"
+bindsym --release Print exec "scrot ~/Immagini/screenshot/scrot-$(date --iso-8601='seconds').png -m -e 'xclip -selection c -t image/png < $f'"
 # Choose window
 bindsym --release Mod1+Sys_Req exec "import -window `xwininfo | awk '/.*Window id:.*/ {print $4}'` ~/Immagini/$(date --iso-8601='seconds').png"
 # Selection screenshot
-bindsym --release Shift+Print exec "scrot ~/Immagini/scrot-$(date --iso-8601='seconds').png -s -e 'xclip -selection c -t image/png < $f'"
+bindsym --release Shift+Print exec "scrot ~/Immagini/screenshot/scrot-$(date --iso-8601='seconds').png -s -e 'xclip -selection c -t image/png < $f'"
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -p "Run: "

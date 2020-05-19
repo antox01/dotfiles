@@ -46,10 +46,9 @@ keys = [
     Key([mod], "j", lazy.layout.up()),
 
     # Move windows up or down in current stack
-    Key([mod, "shift"], "k", lazy.layout.shuffle_down()),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_up()),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_down(), desc="Move the focused window down in the stack"),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_up(), desc="Move the focused window up in the stack"),
 
-    # Switch window focus to other pane(s) of stack
     Key([mod], "space", lazy.layout.next()),
 
     # Swap panes of split stack
@@ -77,9 +76,9 @@ keys = [
     Key([mod, "shift"], "f", lazy.window.toggle_floating(), desc="Toggle floating mode on the focused window"),
 
     # Screenshot utility
-    Key([], "Print", subprocess.call("scrot ~/Immagini/scrot-$(date --iso-8601='seconds').png -m -e 'xclip -selection c -t image/png < $f'"), desc="Take a screenshot and put it in the clipboard and in a file"),
+    #Key([], "Print", lazy.spawn(terminal + " -e scrot ~/Immagini/scrot-$(date --iso-8601='seconds').png -m -e 'xclip -selection c -t image/png < $f'"), desc="Take a screenshot and put it in the clipboard and in a file"),
 
-    Key(["shift"], "Print", subprocess.call("scrot ~/Immagini/scrot-$(date --iso-8601='seconds').png -s -e 'xclip -selection c -t image/png < $f'"), desc="Take a screenshot and put it in the clipboard and in a file"),
+    #Key(["shift"], "Print", lazy.spawn(terminal + " -e scrot ~/Immagini/scrot-$(date --iso-8601='seconds').png -s -e 'xclip -selection c -t image/png < $f'")), desc="Take a screenshot and put it in the clipboard and in a file"),
 
     # Change the volume if your keyboard has special volume keys.
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"), desc="Increase the volume"),

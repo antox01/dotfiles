@@ -35,16 +35,16 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'norcalli/nvim-colorizer.lua'
     Plug 'unblevable/quick-scope'
+    Plug 'justinmk/vim-sneak'
 call plug#end()
 
 set termguicolors
 colorscheme codedark
 
-" Importing the settings of coc
-source ~/.config/nvim/plug-config/coc-config.vim
-" Importing the settings of Netrw
+" Importing plugins settings
+source ~/.config/nvim/plug-config/coc-config.vim " Coc autocomplete settings
 source ~/.config/nvim/plug-config/netrw.vim
-" Importing settings for colorizer
+source ~/.config/nvim/plug-config/sneak.vim
 luafile ~/.config/nvim/lua/plug-colorizer.lua
 
 " Cursor line

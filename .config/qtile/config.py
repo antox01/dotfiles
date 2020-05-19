@@ -143,6 +143,8 @@ screens = [
                 widget.QuickExit(),
             ],
             24,
+            background='#1f1f1f',
+            opacity=0.9
         ),
     ),
 ]

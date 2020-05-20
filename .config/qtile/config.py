@@ -106,15 +106,15 @@ for i in groups:
     ])
 
 layouts = [
-    layout.MonadTall(),
+    layout.MonadTall(margin=10),
     layout.Max(),
     #layout.Stack(num_stacks=2),
     #layout.Bsp(),
     #layout.Columns(),
-    layout.Matrix(),
+    layout.Matrix(margin=10),
     #layout.MonadWide(),
     #layout.RatioTile(),
-    layout.Tile(shift_windows=True),
+    layout.Tile(shift_windows=True, margin=10),
     #layout.TreeTab(),
     #layout.VerticalTile(),
     #layout.Zoomy(),

@@ -36,6 +36,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'norcalli/nvim-colorizer.lua'
     Plug 'unblevable/quick-scope'
     Plug 'justinmk/vim-sneak'
+    Plug 'ThePrimeagen/vim-be-good'
 call plug#end()
 
 set termguicolors

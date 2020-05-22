@@ -73,11 +73,6 @@ keys = [
     #Toggle the floating mode on a window
     Key([mod, "shift"], "f", lazy.window.toggle_floating(), desc="Toggle floating mode on the focused window"),
 
-    # Screenshot utility
-    #Key([], "Print", lazy.spawn(terminal + " -e scrot ~/Immagini/scrot-$(date --iso-8601='seconds').png -m -e 'xclip -selection c -t image/png < $f'"), desc="Take a screenshot and put it in the clipboard and in a file"),
-
-    #Key(["shift"], "Print", lazy.spawn(terminal + " -e scrot ~/Immagini/scrot-$(date --iso-8601='seconds').png -s -e 'xclip -selection c -t image/png < $f'")), desc="Take a screenshot and put it in the clipboard and in a file"),
-
     # Change the volume if your keyboard has special volume keys.
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"), desc="Increase the volume"),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"), desc="Decrease the volume"),

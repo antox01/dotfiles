@@ -29,14 +29,27 @@ set tabstop=4
 
 " Plugin installation
 call plug#begin('~/.local/share/nvim/plugged')
+    " Autocompletion plugins
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    " Colorscheme
     Plug 'tomasiser/vim-code-dark'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
+
+    " Vim colorizer
     Plug 'norcalli/nvim-colorizer.lua'
+
+    " Vim movements
     Plug 'unblevable/quick-scope'
     Plug 'justinmk/vim-sneak'
+
+    " Just a game
     Plug 'ThePrimeagen/vim-be-good'
+
+    " FZF
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
 call plug#end()
 
 set termguicolors
@@ -46,6 +59,7 @@ colorscheme codedark
 source ~/.config/nvim/plug-config/coc-config.vim " Coc autocomplete settings
 source ~/.config/nvim/plug-config/netrw.vim
 source ~/.config/nvim/plug-config/sneak.vim
+source ~/.config/nvim/plug-config/fzf.vim
 luafile ~/.config/nvim/lua/plug-colorizer.lua
 
 " Cursor line

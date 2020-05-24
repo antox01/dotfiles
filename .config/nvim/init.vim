@@ -61,6 +61,7 @@ source ~/.config/nvim/plug-config/coc-config.vim " Coc autocomplete settings
 source ~/.config/nvim/plug-config/netrw.vim
 source ~/.config/nvim/plug-config/sneak.vim
 source ~/.config/nvim/plug-config/fzf.vim
+source ~/.config/nvim/plug-config/whick-key.vim
 luafile ~/.config/nvim/lua/plug-colorizer.lua
 
 " Cursor line

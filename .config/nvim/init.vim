@@ -43,6 +43,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     " Vim movements
     Plug 'unblevable/quick-scope'
     Plug 'justinmk/vim-sneak'
+    Plug 'liuchengxu/vim-which-key'
 
     " Just a game
     Plug 'ThePrimeagen/vim-be-good'

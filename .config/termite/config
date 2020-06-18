@@ -1,10 +1,10 @@
 [options]
-#allow_bold = true
+allow_bold = true
 #audible_bell = false
 #bold_is_bright = true
 #cell_height_scale = 1.0
 #cell_width_scale = 1.0
-#clickable_url = true
+clickable_url = true
 #dynamic_title = true
 font = UbuntuMono Nerd Font Regular 11
 #fullscreen = true
@@ -26,7 +26,7 @@ scrollback_lines = 10000
 #cursor_blink = system
 
 # "block", "underline" or "ibeam"
-#cursor_shape = block
+cursor_shape = block
 
 # Hide links that are no longer valid in url select overlay mode
 #filter_unmatched_urls = true
@@ -59,9 +59,9 @@ highlight = #2f2f2f
 # special
 foreground      = #ffffff
 foreground_bold = #ffffff
-cursor          = #ffffff
+cursor          = #dcdccc
 cursor_foreground = #1d1f21
-background      = #1d1f21
+background     =    #1f1f1f
 
 # black
 color0  = #1c1e22
@@ -93,7 +93,7 @@ color14 = #53bdba
 
 # white
 color7  = #bac2c9
-color15 = #ffffff
+color15 = #e0dcdc
 
 [hints]
 #font = Monospace 12

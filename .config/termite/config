@@ -54,7 +54,7 @@ foreground      = #ffffff
 foreground_bold = #ffffff
 cursor          = #dcdccc
 cursor_foreground = #1d1f21
-background     =    #1e1e1f
+background     =    #1e1e1e
 
 # black
 color0  = #1c1e22

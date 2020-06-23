@@ -90,8 +90,6 @@ let g:airline#extensions#wordcount#enable = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline_theme = 'codedark'
 
-" Remap ESC to ii
-:imap ii <ESC>
 " Remap ESC to jk
 :imap jk <ESC>
 " Remap ESC to jj

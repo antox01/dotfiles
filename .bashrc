@@ -57,7 +57,7 @@ function parse_git_dirty {
         bits=" $(tput bold)$(tput setaf 7)⬆$(tput sgr0)${bits}"
     fi
     if [ "${newfile}" == "0" ]; then
-        bits=" $(tput setaf 15)✔$(tput sgr0)${bits}"
+        bits=" $(tput setaf 15)+$(tput sgr0)${bits}"
     fi
     if [ "${untracked}" == "0" ]; then
         bits=" $(tput bold)$(tput setaf 1)?$(tput sgr0)${bits}"

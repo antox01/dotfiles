@@ -5,6 +5,11 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+shopt -s autocd #Allows you to cd into directory merely by typing the directory name.
+
+######## Bash alias ########
+
+# General application alias
 alias ls='lsd -A'
 alias vifm='${HOME}/.config/vifm/scripts/vifmrun'
 alias p='pacman'

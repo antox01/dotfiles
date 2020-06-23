@@ -29,7 +29,7 @@ import subprocess
 import socket
 import re
 
-from libqtile.config import Key, Screen, Group, Drag, Click
+from libqtile.config import Key, Screen, Group, Match, Drag, Click
 from libqtile.lazy import lazy
 from libqtile import layout, bar, widget, hook
 
@@ -37,6 +37,8 @@ from typing import List  # noqa: F401
 
 mod = "mod4"
 terminal = "termite"
+browser = "google-chrome-stable"
+browser_class = "Chrome"
 
 keys = [
     # Switch between windows in current stack pane
@@ -58,6 +60,7 @@ keys = [
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="TODO"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Open the selected terminal emulator"),
+    Key([mod], "w", lazy.spawn(browser), desc="Open the selected browser"),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Switch to the next layout into the group"),
@@ -84,33 +87,43 @@ keys = [
 ]
 
 #groups = [Group(i) for i in "12345678"]
-groups = [Group(i) for i in "12345678"]
+groups_name = [
+        ("DEV", {"layout": "monadtall"}),
+        ("WWW", {"layout": "monadtall"}),
+        ("GFX", {"layout": "monadtall"}),
+        ("4", {"layout": "monadtall"}),
+        ("5", {"layout": "monadtall"}),
+        ("6", {"layout": "monadtall"}),
+        ("7", {"layout": "monadtall"}),
+        ("8", {"layout": "monadtall"})
+]
+groups = [Group(i, **kargs) for i, kargs in groups_name]
 
-for i in groups:
+for i in range(len(groups)):
     keys.extend([
         # mod1 + letter of group = switch to group
-        Key([mod], i.name, lazy.group[i.name].toscreen()),
+        Key([mod], str(i+1), lazy.group[groups[i].name].toscreen()),
 
         # mod1 + shift + number of group = switch to & move focused window to group
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True)),
+        Key([mod, "shift"], str(i+1), lazy.window.togroup(groups[i].name, switch_group=True)),
         # Or, use below if you prefer not to switch to that group.
         # # mod1 + shift + letter of group = move focused window to group
         # Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
     ])
 
 layouts = [
-    layout.MonadTall(margin=10),
-    layout.Max(),
     #layout.Stack(num_stacks=2),
     #layout.Bsp(),
     #layout.Columns(),
-    layout.Matrix(margin=10),
     #layout.MonadWide(),
     #layout.RatioTile(),
-    layout.Tile(shift_windows=True, margin=10),
     #layout.TreeTab(),
     #layout.VerticalTile(),
     #layout.Zoomy(),
+    layout.MonadTall(margin=10),
+    layout.Max(),
+    layout.Matrix(margin=10),
+    layout.Tile(shift_windows=True, margin=10),
     layout.Floating()
 ]
 
@@ -213,13 +226,6 @@ screens = [
                         padding=0,
                         fontsize=37
                 ),
-                widget.Systray(
-                        background = colors[5]
-                ),
-                widget.sep.Sep(
-                        foreground = colors[5],
-                        background = colors[5]
-                ),
                 widget.CurrentLayout(
                         background = colors[5]
                 ),
@@ -241,7 +247,13 @@ screens = [
                         padding=0,
                         fontsize=37
                 ),
-                widget.QuickExit(),
+                widget.Systray(
+                        background = colors[0]
+                ),
+                widget.QuickExit(
+                        default_text = "",
+                        font = "UbuntuMono Nerd Font"
+                ),
             ],
             22,
             #background='#1f1f1f',

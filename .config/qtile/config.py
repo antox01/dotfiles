@@ -90,8 +90,8 @@ keys = [
 groups_name = [
         ("DEV", {"layout": "monadtall"}),
         ("WWW", {"layout": "monadtall"}),
+        ("CHAT", {"layout": "monadtall"}),
         ("GFX", {"layout": "monadtall"}),
-        ("4", {"layout": "monadtall"}),
         ("5", {"layout": "monadtall"}),
         ("6", {"layout": "monadtall"}),
         ("7", {"layout": "monadtall"}),
@@ -111,30 +111,6 @@ for i in range(len(groups)):
         # Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
     ])
 
-layouts = [
-    #layout.Stack(num_stacks=2),
-    #layout.Bsp(),
-    #layout.Columns(),
-    #layout.MonadWide(),
-    #layout.RatioTile(),
-    #layout.TreeTab(),
-    #layout.VerticalTile(),
-    #layout.Zoomy(),
-    layout.MonadTall(margin=10),
-    layout.Max(),
-    layout.Matrix(margin=10),
-    layout.Tile(shift_windows=True, margin=10),
-    layout.Floating()
-]
-
-widget_defaults = dict(
-    font='sans',
-    fontsize=12,
-    padding=3,
-    foreground='#ffffff'
-)
-extension_defaults = widget_defaults.copy()
-
 ##### COLORS #####
 colors = [
         ["#282a36", "#282a36"], # panel background
@@ -146,13 +122,64 @@ colors = [
         ["#e1acff", "#e1acff"], # window name
 ]
 
+##### DEFAULT THEME SETTINGS FOR LAYOUTS #####
+layout_theme = {
+        "border_width": 2,
+        "margin": 10,
+        "border_focus": "e1acff",
+        "border_normal": "1D2330"
+}
+
+layouts = [
+    #layout.Stack(num_stacks=2),
+    #layout.Bsp(),
+    #layout.Columns(),
+    #layout.MonadWide(),
+    #layout.RatioTile(),
+    #layout.TreeTab(),
+    #layout.VerticalTile(),
+    #layout.Zoomy(),
+    layout.MonadTall(**layout_theme),
+    layout.Max(**layout_theme),
+    layout.Matrix(**layout_theme),
+    layout.Tile(shift_windows=True, **layout_theme),
+    layout.Floating(**layout_theme)
+]
+
+widget_defaults = dict(
+    font='sans',
+    fontsize=12,
+    padding=3,
+    foreground='#ffffff'
+)
+extension_defaults = widget_defaults.copy()
+
 #### Bar options ####
 
 screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.GroupBox(),
+                widget.GroupBox(
+                        font = "UbuntuMono Nerd Font Bold",
+                        fontsize = 11,
+                        margin_y = 3,
+                        margin_x = 0,
+                        padding_y = 5,
+                        padding_x = 7,
+                        borderwidth = 3,
+                        active = colors[2],
+                        inactive = colors[2],
+                        rounded = False,
+                        highlight_color = colors[1],
+                        highlight_method = "line",
+                        this_current_screen_border = colors[3],
+                        this_screen_border = colors [4],
+                        other_current_screen_border = colors[0],
+                        other_screen_border = colors[0],
+                        foreground = colors[2],
+                        background = colors[0]
+                ),
                 widget.WindowName(),
                 widget.TextBox(
                         text='',

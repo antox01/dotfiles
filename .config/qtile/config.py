@@ -38,7 +38,7 @@ from typing import List  # noqa: F401
 mod = "mod4"
 terminal = "termite"
 browser = "google-chrome-stable"
-browser_class = "Chrome"
+browser_class = "Google-chrome"
 
 keys = [
     # Switch between windows in current stack pane
@@ -89,8 +89,8 @@ keys = [
 #groups = [Group(i) for i in "12345678"]
 groups_name = [
         ("DEV", {"layout": "monadtall"}),
-        ("WWW", {"layout": "monadtall"}),
-        ("CHAT", {"layout": "monadtall"}),
+        ("WWW", {"layout": "monadtall", "matches": [Match(wm_class=[browser_class])]}),
+        ("CHAT", {"layout": "monadtall", "matches": [Match(wm_class=["TelegramDesktop"])]}),
         ("GFX", {"layout": "monadtall"}),
         ("5", {"layout": "monadtall"}),
         ("6", {"layout": "monadtall"}),

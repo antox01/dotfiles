@@ -101,14 +101,8 @@ groups = [Group(i, **kargs) for i, kargs in groups_name]
 
 for i in range(len(groups)):
     keys.extend([
-        # mod1 + letter of group = switch to group
-        Key([mod], str(i+1), lazy.group[groups[i].name].toscreen()),
-
-        # mod1 + shift + number of group = switch to & move focused window to group
-        Key([mod, "shift"], str(i+1), lazy.window.togroup(groups[i].name, switch_group=True)),
-        # Or, use below if you prefer not to switch to that group.
-        # # mod1 + shift + letter of group = move focused window to group
-        # Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
+        Key([mod], str(i+1), lazy.group[groups[i].name].toscreen()), # Switch to another group
+        Key([mod, "shift"], str(i+1), lazy.window.togroup(groups[i].name, switch_group=True)), # Move focused window to group and switch to it
     ])
 
 ##### COLORS #####
@@ -183,7 +177,6 @@ screens = [
                 widget.WindowName(),
                 widget.TextBox(
                         text='',
-                        #background = colors[4],
                         foreground = colors[5],
                         padding=0,
                         fontsize=37
@@ -309,7 +302,6 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
-    # Run the utility of `xprop` to see the wm class and name of an X client.
     {'wmclass': 'confirm'},
     {'wmclass': 'dialog'},
     {'wmclass': 'download'},

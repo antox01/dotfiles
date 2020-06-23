@@ -46,13 +46,6 @@ cursor_shape = block
 #cursor = #dcdccc
 #cursor_foreground = #dcdccc
 
-#foreground = #ffffff
-#foreground_bold = #ffffff
-#background = #3f3f3f
-#background = #1f1f1f
-# 20% background transparency (requires a compositor)
-#background = rgba(31, 31, 31, 0.9)
-
 # If unset, will reverse foreground and background
 highlight = #2f2f2f
 
@@ -61,7 +54,7 @@ foreground      = #ffffff
 foreground_bold = #ffffff
 cursor          = #dcdccc
 cursor_foreground = #1d1f21
-background     =    #1f1f1f
+background     =    #1e1e1f
 
 # black
 color0  = #1c1e22

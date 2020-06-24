@@ -96,7 +96,7 @@ groups_name = [
         ("WWW", {"layout": "monadtall", "matches": [Match(wm_class=[browser_class])]}),
         ("CHAT", {"layout": "monadtall", "matches": [Match(wm_class=["TelegramDesktop"])]}),
         ("GFX", {"layout": "monadtall"}),
-        ("5", {"layout": "monadtall"}),
+        ("DOC", {"layout": "monadtall"}),
         ("6", {"layout": "monadtall"}),
         ("7", {"layout": "monadtall"}),
         ("8", {"layout": "monadtall"})

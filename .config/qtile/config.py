@@ -111,21 +111,25 @@ for i in range(len(groups)):
 
 ##### COLORS #####
 colors = [
-        ["#282a36", "#282a36"], # panel background
+        ["#1e1e1e", "#1e1e1e"], # background
+        ["#ffffff", "#ffffff"], # foreground
+        ["#1c1e22", "#1c1e22"], # color0
+        ["#aa2727", "#aa2727"], # color1
+        ["#639440", "#639440"], # color2
+        ["#dc6c1e", "#dc6c1e"], # color3
+        ["#5f819d", "#5f819d"], # color4
+        ["#7e4092", "#7e4092"], # color5
+        ["#649693", "#649693"], # color6
+        ["#bac2c9", "#bac2c9"], # color7
         ["#434758", "#434758"], # background for current screen tab
-        ["#ffffff", "#ffffff"], # font color for group names
-        ["#ff5555", "#ff5555"], # border line color for current tab
-        ["#bb10bb", "#bb10bb"], # border line color for other tab and odd widgets
-        ["#668bd7", "#668bd7"], # color for the even widgets
-        ["#e1acff", "#e1acff"], # window name
 ]
 
 ##### DEFAULT THEME SETTINGS FOR LAYOUTS #####
 layout_theme = {
         "border_width": 2,
         "margin": 10,
-        "border_focus": "e1acff",
-        "border_normal": "1D2330"
+        "border_focus": "#e1acff",
+        "border_normal": "#1D2330"
 }
 
 layouts = [
@@ -166,19 +170,21 @@ screens = [
                         padding_y = 5,
                         padding_x = 7,
                         borderwidth = 3,
-                        active = colors[2],
-                        inactive = colors[2],
+                        active = colors[1],
+                        inactive = colors[1],
                         rounded = False,
-                        highlight_color = colors[1],
+                        highlight_color = colors[10],
                         highlight_method = "line",
                         this_current_screen_border = colors[3],
-                        this_screen_border = colors [4],
+                        this_screen_border = colors[4],
                         other_current_screen_border = colors[0],
                         other_screen_border = colors[0],
-                        foreground = colors[2],
+                        foreground = colors[1],
                         background = colors[0]
                 ),
-                widget.WindowName(),
+                widget.WindowName(
+                        foreground = colors[1],
+                ),
                 widget.TextBox(
                         text='',
                         foreground = colors[5],
@@ -187,33 +193,33 @@ screens = [
                 ),
                 widget.TextBox(
                         text=" 🖬",
-                        foreground=colors[2],
+                        foreground=colors[1],
                         background=colors[5],
                         padding = 0,
                         fontsize=14
                 ),
                 widget.memory.Memory(
-                        foreground = colors[2],
+                        foreground = colors[1],
                         background = colors[5],
                         padding = 5
                 ),
                 widget.TextBox(
                         text='',
                         background = colors[5],
-                        foreground = colors[4],
+                        foreground = colors[3],
                         padding=0,
                         fontsize=37
                 ),
                 widget.net.Net(
                         interface = "wlan0",
                         format = '{down} ↓↑ {up}',
-                        foreground = colors[2],
-                        background = colors[4],
+                        foreground = colors[1],
+                        background = colors[3],
                         padding = 5
                 ),
                 widget.TextBox(
                         text='',
-                        background = colors[4],
+                        background = colors[3],
                         foreground = colors[5],
                         padding=0,
                         fontsize=37
@@ -226,47 +232,51 @@ screens = [
                         format="{char} {percent:2.0%} {hour:d}:{min:02d}",
                         update_interval=10,
                         background = colors[5],
+                        foreground = colors[1],
                 ),
                 widget.TextBox(
                         text='',
                         background = colors[5],
-                        foreground = colors[4],
+                        foreground = colors[3],
                         padding=0,
                         fontsize=37
                 ),
                 widget.TextBox(
                         text='Vol:',
-                        background = colors[4],
-                        foreground = colors[2],
+                        background = colors[3],
+                        foreground = colors[1],
                         padding=4,
                 ),
                 widget.volume.Volume(
-                        background = colors[4]
+                        background = colors[3],
+                        foreground = colors[1],
                 ),
                 widget.TextBox(
                         text='',
-                        background = colors[4],
+                        background = colors[3],
                         foreground = colors[5],
                         padding=0,
                         fontsize=37
                 ),
                 widget.CurrentLayout(
+                        foreground = colors[1],
                         background = colors[5]
                 ),
                 widget.TextBox(
                         text='',
                         background = colors[5],
-                        foreground = colors[4],
+                        foreground = colors[3],
                         padding=0,
                         fontsize=37
                 ),
                 widget.Clock(
                         format='%Y-%m-%d %a %H:%M %p',
-                        background = colors[4]
+                        foreground = colors[1],
+                        background = colors[3]
                 ),
                 widget.TextBox(
                         text='',
-                        background = colors[4],
+                        background = colors[3],
                         foreground = colors[0],
                         padding=0,
                         fontsize=37

@@ -97,7 +97,7 @@ groups_name = [
         ("CHAT", {"layout": "monadtall", "matches": [Match(wm_class=["TelegramDesktop"])]}),
         ("GFX", {"layout": "monadtall"}),
         ("DOC", {"layout": "monadtall"}),
-        ("6", {"layout": "monadtall"}),
+        ("MUS", {"layout": "monadtall"}),
         ("7", {"layout": "monadtall"}),
         ("8", {"layout": "monadtall"})
 ]
@@ -128,7 +128,7 @@ colors = [
 layout_theme = {
         "border_width": 2,
         "margin": 10,
-        "border_focus": "#e1acff",
+        "border_focus": "#bac2c9",
         "border_normal": "#1D2330"
 }
 

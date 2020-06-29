@@ -19,6 +19,8 @@ set path+=**
 set wildmenu
 set wildmode=longest,list
 
+set textwidth=120
+
 set completeopt=menuone,longest
 
 " === TAB Settings === "

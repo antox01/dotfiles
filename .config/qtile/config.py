@@ -37,7 +37,7 @@ from typing import List  # noqa: F401
 
 mod = "mod4"
 terminal = "termite"
-browser = "google-chrome-stable"
+browser = "firefox"
 browser_class = "Google-chrome"
 
 keys = [

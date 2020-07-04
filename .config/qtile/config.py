@@ -98,8 +98,7 @@ groups_name = [
         ("GFX", {"layout": "monadtall"}),
         ("DOC", {"layout": "monadtall"}),
         ("MUS", {"layout": "monadtall"}),
-        ("7", {"layout": "monadtall"}),
-        ("8", {"layout": "monadtall"})
+        ("VID", {"layout": "monadtall"}),
 ]
 groups = [Group(i, **kargs) for i, kargs in groups_name]
 

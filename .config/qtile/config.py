@@ -36,7 +36,7 @@ from libqtile import layout, bar, widget, hook
 from typing import List  # noqa: F401
 
 mod = "mod4"
-terminal = "termite"
+terminal = "st"
 browser = "firefox"
 browser_class = "Google-chrome"
 

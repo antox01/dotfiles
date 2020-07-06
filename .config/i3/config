@@ -53,7 +53,7 @@ bindsym --release Mod1+Sys_Req exec "import -window `xwininfo | awk '/.*Window i
 bindsym --release Shift+Print exec "scrot ~/Immagini/screenshot/scrot-$(date -I).png -s -e 'xclip -selection c -t image/png < $f'"
 
 # start dmenu (a program launcher)
-bindsym $mod+p exec dmenu_run -p "Run: "
+bindsym $mod+r exec dmenu_run -p "Run: "
 
 # change focus
 bindsym $mod+h focus left
@@ -94,7 +94,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+f floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle

@@ -38,7 +38,7 @@ from typing import List  # noqa: F401
 mod = "mod4"
 terminal = "st"
 browser = "firefox"
-browser_class = "Google-chrome"
+browser_class = "firefox"
 
 keys = [
     # Switch between windows in current stack pane

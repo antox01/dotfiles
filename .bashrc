@@ -59,7 +59,7 @@ function parse_git_dirty {
         bits=" >${bits}"
     fi
     if [ "${ahead}" == "0" ]; then
-        bits=" $(tput bold)$(tput setaf 7)⬆$(tput sgr0)${bits}"
+        bits=" $(tput bold)$(tput setaf 7)⬆ $(tput sgr0)${bits}"
     fi
     if [ "${newfile}" == "0" ]; then
         bits=" $(tput setaf 15)+$(tput sgr0)${bits}"

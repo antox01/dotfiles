@@ -2,7 +2,7 @@
 let mapleader=" "
 
 set nocompatible
-filetype plugin on
+"filetype plugin on
 
 set number relativenumber
 syntax on
@@ -19,8 +19,6 @@ set path+=**
 set wildmenu
 set wildmode=longest,list
 
-set textwidth=120
-
 set completeopt=menuone,longest
 
 " === TAB Settings === "
@@ -35,7 +33,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     " Colorscheme
-    Plug 'tomasiser/vim-code-dark'
+    "Plug 'tomasiser/vim-code-dark'
+    Plug 'marciomazza/vim-brogrammer-theme'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
 
@@ -56,7 +55,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 call plug#end()
 
 set termguicolors
-colorscheme codedark
+colorscheme brogrammer
 
 " Importing plugins settings
 source ~/.config/nvim/plug-config/coc-config.vim " Coc autocomplete settings
@@ -90,7 +89,7 @@ highlight QuickScopeSecondary guifg='#afff5f' gui=underline ctermfg=155 cterm=un
 " Vim-airline
 let g:airline#extensions#wordcount#enable = 1
 let g:airline#extensions#hunks#non_zero_only = 1
-let g:airline_theme = 'codedark'
+"let g:airline_theme = 'codedark'
 
 " Remap ESC to jk
 :imap jk <ESC>

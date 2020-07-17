@@ -49,44 +49,63 @@ cursor_shape = block
 # If unset, will reverse foreground and background
 highlight = #2f2f2f
 
+background = #131313
+cursor = #b9b9b9
+foreground = #d6dbe5
+color0 = #1f1f1f
+color1 = #f81118
+color2 = #2dc55e
+color3 = #ecba0f
+color4 = #2a84d2
+color5 = #4e5ab7
+color6 = #1081d6
+color7 = #d6dbe5
+color8 = #d6dbe5
+color9 = #de352e
+color10 = #1dd361
+color11 = #f3bd09
+color12 = #1081d6
+color13 = #5350b9
+color14 = #0f7ddb
+color15 = #ffffff
 # special
-foreground      = #ffffff
-foreground_bold = #ffffff
-cursor          = #dcdccc
-cursor_foreground = #1d1f21
-background     =    #1e1e1e
+#foreground      = #ffffff
+#foreground_bold = #ffffff
+#cursor          = #dcdccc
+#cursor_foreground = #1d1f21
+#background     =    #1e1e1e
 
 # black
-color0  = #1c1e22
-color8  = #151b24
-
-# red
-color1  = #aa2727
-color9  = #c93131
-
-# green
-color2  = #639440
-color10 = #7ebd68
-
-# yellow
-color3  = #dc6c1e
-color11 = #f2ad27
-
-# blue
-color4  = #5f819d
-color12 = #2f74ae
-
-# magenta
-color5  = #7e4092
-color13 = #a05eb4
-
-# cyan
-color6  = #649693
-color14 = #53bdba
-
-# white
-color7  = #bac2c9
-color15 = #e0dcdc
+#color0  = #1c1e22
+#color8  = #151b24
+#
+## red
+#color1  = #aa2727
+#color9  = #c93131
+#
+## green
+#color2  = #639440
+#color10 = #7ebd68
+#
+## yellow
+#color3  = #dc6c1e
+#color11 = #f2ad27
+#
+## blue
+#color4  = #5f819d
+#color12 = #2f74ae
+#
+## magenta
+#color5  = #7e4092
+#color13 = #a05eb4
+#
+## cyan
+#color6  = #649693
+#color14 = #53bdba
+#
+## white
+#color7  = #bac2c9
+#color15 = #e0dcdc
 
 [hints]
 #font = Monospace 12

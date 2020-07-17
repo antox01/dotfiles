@@ -54,7 +54,12 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'junegunn/fzf.vim'
 call plug#end()
 
-set termguicolors
+if has("termguicolors")     " set true colors
+    set t_8f=\[[38;2;%lu;%lu;%lum
+    set t_8b=\[[48;2;%lu;%lu;%lum
+    set termguicolors
+endif
+"set termguicolors
 colorscheme brogrammer
 
 " Importing plugins settings
@@ -68,18 +73,18 @@ luafile ~/.config/nvim/lua/plug-colorizer.lua
 " Cursor line
 set cursorline
 set cursorcolumn
-highlight CursorLine ctermbg=Yellow cterm=bold guibg=#2b2b2b
-highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#2b2b2b
+"highlight CursorLine ctermbg=Yellow cterm=bold guibg=#2b2b2b
+"highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#2b2b2b
 
 set noshowmode
 
 set splitbelow splitright
 
 " Mapping a better way to move between the splits in vim
-nnoremap <Leader>l <C-w>l
-nnoremap <Leader>k <C-w>k
-nnoremap <Leader>j <C-w>j
-nnoremap <Leader>h <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+nnoremap <C-h> <C-w>h
 
 " QuickScope Highlighting
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']

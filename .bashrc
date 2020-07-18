@@ -37,6 +37,9 @@ export STARSHIP_CONFIG=~/.config/starship/config.toml
 
 #PS1='\e[0;31m[\e[m\u@\h \W]\$ '
 
+# Check if the prompt is not installed and then install it
+[ ! -f "/usr/local/bin/starship" ] && curl -fsSL https://starship.rs/install.sh | bash
+
 eval "$(starship init bash)"
 
 # Activating the vi mode in bash

@@ -1,13 +1,16 @@
 # Define the custom separator in global properties for boilerplate
-command=~/.config/i3blocks/scripts/$BLOCK_NAME
+command=~/.local/bin/statusbar/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
 [cpu]
 interval=15
 
+[memory]
+interval=15
+
 [battery]
-command=~/.config/i3blocks/scripts/battery BAT0
+command=~/.local/bin/statusbar/battery BAT0
 interval=10
 
 [volume]

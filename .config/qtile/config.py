@@ -69,7 +69,7 @@ keys = [
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Switch to the next layout into the group"),
     Key([mod, "shift"], "Tab", lazy.prev_layout(), desc="Switch to the previous layout into the group"),
-    Key([mod, "shift"], "q", lazy.window.kill(), desc="Close the focused window"),
+    Key([mod], "q", lazy.window.kill(), desc="Close the focused window"),
 
     Key([mod, "shift"], "r", lazy.restart(), desc="Restart qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown the current session of qtile"),

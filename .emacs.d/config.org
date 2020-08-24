@@ -1,0 +1,227 @@
+#+TITLE: Emacs configuration
+#+DESCRIPTION: Org-mode based configuration
+#+LANGUAGE: en
+#+PROPERTY: results silent
+
+* Basic configurations
+** Emacs Frame
+   Disable all the bar present in emacs and adding the line number
+
+    #+BEGIN_SRC emacs-lisp
+	(menu-bar-mode -1)
+	(scroll-bar-mode -1)
+	(show-paren-mode t)
+	(tool-bar-mode -1)
+	(tooltip-mode nil)
+	(global-display-line-numbers-mode t)
+	(setq display-line-numbers-type 'relative)
+	(add-to-list
+	    'default-frame-alist
+	    '(fullscreen . maximized))
+	(add-to-list
+	    'default-frame-alist
+	    '(frame-resize-pixelwise . 't))
+	;;(setq default-frame-alist
+		;;'((fullscreen . maximized)
+		    ;;(frame-resize-pixelwise . t)))
+    #+END_SRC
+
+** Backup files
+    #+BEGIN_SRC emacs-lisp
+    (setq backup-directory-alist '(("." . "~/.local/share/emacs-saves")))
+    (setq backup-by-copying t)
+    #+END_SRC
+    
+** Theme
+ #+BEGIN_SRC emacs-lisp
+     (use-package doom-themes
+	 :config
+	 (load-theme 'doom-dark+ t)
+	 :ensure t)
+ #+END_SRC
+
+* Evil-mode
+    #+BEGIN_SRC emacs-lisp
+      (use-package evil
+	  :ensure t)
+      (evil-mode 1)
+
+      (use-package evil-leader
+	  :ensure t
+	  :config
+	  (global-evil-leader-mode)
+	  (evil-leader/set-leader (kbd "SPC")))
+
+      (use-package evil-quickscope
+	:ensure t
+	:config
+	(global-evil-quickscope-mode 1))
+    #+END_SRC
+
+* Magit
+    #+BEGIN_SRC emacs-lisp
+      (use-package magit
+	  :ensure t)
+
+      (use-package evil-magit
+	  :ensure t
+	  :config
+	  (setq evil-magit-state 'normal))
+    #+END_SRC
+
+* Helm
+#+BEGIN_SRC emacs-lisp
+    (use-package helm
+	:ensure t)
+    (require 'helm-config)
+    (setq helm-split-window-in-side-p t
+	helm-move-to-line-cycle-in-source t)
+
+    (helm-mode 1)
+    (global-set-key (kbd "M-x") 'helm-M-x)
+    (global-set-key (kbd "C-x C-f") 'helm-find-files)
+#+END_SRC
+
+* Which-key
+#+BEGIN_SRC emacs-lisp
+    (use-package which-key
+	:ensure t)
+    (setq which-key-show-early-on-C-h t)
+    (which-key-setup-side-window-bottom)
+    (which-key-mode)
+#+END_SRC
+
+* Autocompletion
+** Company
+#+BEGIN_SRC emacs-lisp
+    (use-package company
+	:ensure t
+	:config
+	(setq company-idle-delay 0)
+	(setq company-minimun-prefix-length 2)
+	
+	(define-key company-active-map (kbd "C-n") 'company-select-next)
+	(define-key company-active-map (kbd "C-p") 'company-select-previous)
+	(define-key company-search-map (kbd "C-n") 'company-select-next)
+	(define-key company-search-map (kbd "C-p") 'company-select-previous)
+	(define-key company-search-map (kbd "C-t") 'company-search-toggle-filtering)
+    )
+#+END_SRC
+
+** Company-quickhelp
+Company documentation for selected item
+    #+BEGIN_SRC emacs-lisp
+    (use-package company-quickhelp
+    :ensure t
+    )
+    (company-quickhelp-mode)
+    #+END_SRC
+
+** Company-irony
+   #+BEGIN_SRC emacs-lisp
+    (use-package company-irony
+    :ensure t)
+   #+END_SRC 
+ 
+** Company-backends 
+   #+BEGIN_SRC emacs-lisp
+   (require 'company)
+    (setq company-backends '(company-irony company-elisp))
+    #+END_SRC
+ 
+** Irony
+   #+BEGIN_SRC emacs-lisp
+   (use-package irony
+   :ensure t
+   :config
+   (add-hook 'c++-mode-hook 'irony-mode)
+   (add-hook 'c-mode-hook 'irony-mode)
+   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+   #+END_SRC
+
+** Flycheck
+   #+BEGIN_SRC emacs-lisp
+   (use-package flycheck
+   :ensure t
+   :config
+   (global-flycheck-mode))
+   #+END_SRC
+
+** Flycheck-irony
+   #+BEGIN_SRC emacs-lisp
+   (use-package flycheck-irony
+   :ensure t
+   :config
+   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+   #+END_SRC
+
+** Eldoc
+   #+BEGIN_SRC emacs-lisp
+   (use-package eldoc
+   :ensure t
+   :config
+   (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+   (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
+   (add-hook 'ielm-mode-hook 'eldoc-mode))
+   #+END_SRC
+   
+** Irony-eldoc
+   #+BEGIN_SRC emacs-lisp
+   (use-package irony-eldoc
+   :ensure t
+   :config
+   (add-hook 'irony-mode-hook 'irony-eldoc))
+   #+END_SRC
+
+** Start autocompletion
+   #+BEGIN_SRC emacs-lisp
+    (with-eval-after-load 'company
+	(add-hook 'c++-mode-hook 'company-mode)
+	(add-hook 'c-mode-hook 'company-mode)
+	(add-hook 'emacs-lisp-mode-hook 'company-mode))
+   #+END_SRC
+
+** Auto includes/imports
+   #+BEGIN_SRC emacs-lisp
+    (use-package cpp-auto-include
+	:ensure t
+	:config
+	(add-hook 'company-complete-selection-hook 'cpp-auto-include)
+	(add-hook 'company-complete-common-hook 'cpp-auto-include))
+   #+END_SRC
+
+* Try
+#+BEGIN_SRC emacs-lisp
+    (use-package try
+	:ensure t)
+#+END_SRC
+
+* Rainbow-mode
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-mode
+      :ensure t)
+  (use-package rainbow-delimiters
+    :ensure t
+    :config
+    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+  (use-package rainbow-identifiers
+    :ensure t
+    :config
+    (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
+#+END_SRC
+
+* Org-mode
+** Evil-org
+  Evil-mode integration for org-mode
+    #+BEGIN_SRC emacs-lisp
+    (use-package evil-org
+	:ensure t
+	:after org
+	:config
+	(add-hook 'org-mode-hook 'evil-org-mode)
+	(add-hook 'evil-org-mode-hook
+	    (lambda ()
+		(evil-org-set-key-theme)))
+    )
+    #+END_SRC
+

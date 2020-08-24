@@ -91,7 +91,7 @@
     (which-key-mode)
 #+END_SRC
 
-* Autocompletion
+* Programming
 ** Company
 #+BEGIN_SRC emacs-lisp
     (use-package company
@@ -188,6 +188,14 @@ Company documentation for selected item
 	:config
 	(add-hook 'company-complete-selection-hook 'cpp-auto-include)
 	(add-hook 'company-complete-common-hook 'cpp-auto-include))
+   #+END_SRC
+
+** Autopair
+   #+BEGIN_SRC emacs-lisp
+     (use-package autopair
+       :ensure t
+       :config
+       (add-hook 'prog-mode-hook 'autopair-mode))
    #+END_SRC
 
 * Try

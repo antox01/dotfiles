@@ -34,7 +34,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     " Colorscheme
     "Plug 'tomasiser/vim-code-dark'
-    Plug 'marciomazza/vim-brogrammer-theme'
+    Plug 'chriskempson/base16-vim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
 
@@ -45,9 +45,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'unblevable/quick-scope'
     Plug 'justinmk/vim-sneak'
     Plug 'liuchengxu/vim-which-key'
-
-    " Just a game
-    Plug 'ThePrimeagen/vim-be-good'
 
     " FZF
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -60,7 +57,7 @@ if has("termguicolors")     " set true colors
     set termguicolors
 endif
 "set termguicolors
-colorscheme brogrammer
+colorscheme base16-default-dark
 
 " Importing plugins settings
 source ~/.config/nvim/plug-config/coc-config.vim " Coc autocomplete settings

@@ -11,11 +11,11 @@ shopt -s autocd #Allows you to cd into directory merely by typing the directory 
 
 # General application alias
 alias ls='lsd -A'
-alias vifm='${HOME}/.config/vifm/scripts/vifmrun'
 alias p='pacman'
 alias sp='sudo pacman'
 alias spu='sudo pacman -Syu'
 alias v='nvim'
+alias vim='nvim'
 alias sudo='sudo '
 alias s='sudo '
 

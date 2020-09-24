@@ -8,11 +8,14 @@ endif
 
 " Plugin installation
 call plug#begin('~/.local/share/nvim/plugged')
+
+    " Comments in vim
+    Plug 'tpope/vim-commentary'
+
     " Autocompletion plugins
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     " Colorscheme
-    "Plug 'tomasiser/vim-code-dark'
     Plug 'chriskempson/base16-vim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'

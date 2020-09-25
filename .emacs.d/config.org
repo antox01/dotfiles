@@ -36,7 +36,7 @@
  #+BEGIN_SRC emacs-lisp
      (use-package doom-themes
 	 :config
-	 (load-theme 'doom-dark+ t)
+	 (load-theme 'base16-default-dark t)
 	 :ensure t)
  #+END_SRC
 
@@ -46,18 +46,32 @@
 	  :ensure t)
       (evil-mode 1)
 
-      (use-package evil-leader
-	  :ensure t
-	  :config
-	  (global-evil-leader-mode)
-	  (evil-leader/set-leader (kbd "SPC")))
+      ;; (use-package evil-leader
+      ;;     :ensure t
+      ;;     :config
+      ;;     (global-evil-leader-mode)
+      ;;     (evil-leader/set-leader (kbd "SPC"))
+      ;;     (evil-leader/set-key "f" 'helm-find-files)
+      ;; )
 
       (use-package evil-quickscope
 	:ensure t
 	:config
 	(global-evil-quickscope-mode 1))
-    #+END_SRC
 
+      (evil-set-leader 'normal (kbd "SPC"))
+      (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
+      (evil-define-key 'normal 'global (kbd "<leader>ff") 'helm-find-files)
+    #+END_SRC
+    
+* Key-chord
+  Enable delayed keypressing in the editor
+#+BEGIN_SRC emacs-lisp
+    (setq key-chord-two-keys-delay 0.5)
+    (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
+    (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+    (key-chord-mode 1)
+#+END_SRC
 * Magit
     #+BEGIN_SRC emacs-lisp
       (use-package magit

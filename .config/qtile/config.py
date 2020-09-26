@@ -72,8 +72,8 @@ keys = [
     Key([mod], "q", lazy.window.kill(), desc="Close the focused window"),
 
     Key([mod, "shift"], "r", lazy.restart(), desc="Restart qtile"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown the current session of qtile"),
-    Key([mod], "r", lazy.spawn("dmenu_run -p 'Run: '"), desc="dmenu application launcher"),
+    Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown the current session of qtile"),
+    Key([mod], "d", lazy.spawn("dmenu_run -p 'Run: '"), desc="dmenu application launcher"),
 
     # Toggle the fullscreen setting
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window"),
@@ -126,7 +126,7 @@ colors = [
 ##### DEFAULT THEME SETTINGS FOR LAYOUTS #####
 layout_theme = {
         "border_width": 2,
-        "margin": 10,
+        "margin": 4,
         "border_focus": "#bac2c9",
         "border_normal": "#1D2330"
 }
@@ -197,7 +197,7 @@ screens = [
                         padding = 0,
                         fontsize=14
                 ),
-                widget.memory.Memory(
+                widget.Memory(
                         foreground = colors[1],
                         background = colors[5],
                         padding = 5
@@ -209,7 +209,7 @@ screens = [
                         padding=0,
                         fontsize=37
                 ),
-                widget.net.Net(
+                widget.Net(
                         interface = "wlan0",
                         format = '{down} ↓↑ {up}',
                         foreground = colors[1],
@@ -223,7 +223,7 @@ screens = [
                         padding=0,
                         fontsize=37
                 ),
-                widget.battery.Battery(
+                widget.Battery(
                         battery=0,
                         charge_char='🔌',
                         discharge_char='🔋',
@@ -246,7 +246,7 @@ screens = [
                         foreground = colors[1],
                         padding=4,
                 ),
-                widget.volume.Volume(
+                widget.Volume(
                         background = colors[3],
                         foreground = colors[1],
                 ),
@@ -348,4 +348,4 @@ def autostart():
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-wmname = "LG3D"
+wmname = "LG3DD"

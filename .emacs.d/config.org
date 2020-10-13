@@ -62,6 +62,25 @@
       (evil-set-leader 'normal (kbd "SPC"))
       (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
       (evil-define-key 'normal 'global (kbd "<leader>ff") 'helm-find-files)
+      (evil-define-key 'normal 'global (kbd "<leader>fd") 'dired)
+
+      ;; Buffers specific keybinds
+      (evil-define-key 'normal 'global (kbd "<leader>bk") 'kill-buffer-and-window)
+      (evil-define-key 'normal 'global (kbd "<leader>bl") 'switch-to-buffer)
+      (evil-define-key 'normal 'global (kbd "<leader>bn") 'next-buffer)
+      (evil-define-key 'normal 'global (kbd "<leader>bp") 'previous-buffer)
+
+      ;; Window movements
+      (evil-define-key 'normal 'global (kbd "<leader>wq") 'evil-quit)
+      (evil-define-key 'normal 'global (kbd "<leader>wc") 'evil-window-delete)
+      (evil-define-key 'normal 'global (kbd "<leader>wb") 'split-window-below)
+      (evil-define-key 'normal 'global (kbd "<leader>wv") 'split-window-horizontally)
+      (evil-define-key 'normal 'global (kbd "<leader>wh") 'evil-window-left)
+      (evil-define-key 'normal 'global (kbd "<leader>wj") 'evil-window-down)
+      (evil-define-key 'normal 'global (kbd "<leader>wk") 'evil-window-top)
+      (evil-define-key 'normal 'global (kbd "<leader>wl") 'evil-window-right)
+
+      (evil-define-key 'normal 'global (kbd "<leader>h") 'help-command)
     #+END_SRC
     
 * Key-chord
@@ -131,42 +150,32 @@ Company documentation for selected item
     (company-quickhelp-mode)
     #+END_SRC
 
-** Company-irony
-   #+BEGIN_SRC emacs-lisp
-    (use-package company-irony
-    :ensure t)
-   #+END_SRC 
- 
 ** Company-backends 
    #+BEGIN_SRC emacs-lisp
    (require 'company)
-    (setq company-backends '(company-irony company-elisp))
+    (setq company-backends '(company-elisp))
     #+END_SRC
- 
-** Irony
+
+** Eglot
    #+BEGIN_SRC emacs-lisp
-   (use-package irony
-   :ensure t
-   :config
-   (add-hook 'c++-mode-hook 'irony-mode)
-   (add-hook 'c-mode-hook 'irony-mode)
-   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+     (use-package eglot
+       :ensure t
+       :config
+       (add-to-list 'eglot-server-programs `((c++-mode c-mode) "clangd"))
+       (add-to-list 'eglot-server-programs
+		    `(python-mode . ("pyls" "-v" "--tcp" "--host"
+				     "localhost" "port" :autoport)))
+       (add-hook 'c++-mode-hook 'eglot-ensure)
+       (add-hook 'c-mode-hook 'eglot-ensure)
+       (add-hook 'python-mode-hook 'eglot-ensure))
    #+END_SRC
 
 ** Flycheck
    #+BEGIN_SRC emacs-lisp
-   (use-package flycheck
-   :ensure t
-   :config
-   (global-flycheck-mode))
-   #+END_SRC
-
-** Flycheck-irony
-   #+BEGIN_SRC emacs-lisp
-   (use-package flycheck-irony
-   :ensure t
-   :config
-   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+     ;; (use-package flycheck
+     ;; :ensure t
+     ;; :config
+     ;; (global-flycheck-mode))
    #+END_SRC
 
 ** Eldoc
@@ -179,29 +188,12 @@ Company documentation for selected item
    (add-hook 'ielm-mode-hook 'eldoc-mode))
    #+END_SRC
    
-** Irony-eldoc
-   #+BEGIN_SRC emacs-lisp
-   (use-package irony-eldoc
-   :ensure t
-   :config
-   (add-hook 'irony-mode-hook 'irony-eldoc))
-   #+END_SRC
-
 ** Start autocompletion
    #+BEGIN_SRC emacs-lisp
     (with-eval-after-load 'company
 	(add-hook 'c++-mode-hook 'company-mode)
 	(add-hook 'c-mode-hook 'company-mode)
 	(add-hook 'emacs-lisp-mode-hook 'company-mode))
-   #+END_SRC
-
-** Auto includes/imports
-   #+BEGIN_SRC emacs-lisp
-    (use-package cpp-auto-include
-	:ensure t
-	:config
-	(add-hook 'company-complete-selection-hook 'cpp-auto-include)
-	(add-hook 'company-complete-common-hook 'cpp-auto-include))
    #+END_SRC
 
 ** Autopair
@@ -211,6 +203,19 @@ Company documentation for selected item
        :config
        (add-hook 'prog-mode-hook 'autopair-mode))
    #+END_SRC
+
+* Yasnippet 
+  #+BEGIN_SRC emacs-lisp
+    (use-package yasnippet
+      :ensure t
+      :config
+      (setq yas-snippet-dirs
+	    '("~/.emacs.d/snippets"))
+      (yas-global-mode 1))
+
+    (use-package yasnippet-snippets
+      :ensure t)
+  #+END_SRC
 
 * Try
 #+BEGIN_SRC emacs-lisp

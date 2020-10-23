@@ -8,22 +8,16 @@
    Disable all the bar present in emacs and adding the line number
 
     #+BEGIN_SRC emacs-lisp
-	(menu-bar-mode -1)
-	(scroll-bar-mode -1)
-	(show-paren-mode t)
-	(tool-bar-mode -1)
-	(tooltip-mode nil)
-	(global-display-line-numbers-mode t)
-	(setq display-line-numbers-type 'relative)
-	(add-to-list
-	    'default-frame-alist
-	    '(fullscreen . maximized))
-	(add-to-list
-	    'default-frame-alist
-	    '(frame-resize-pixelwise . 't))
-	;;(setq default-frame-alist
-		;;'((fullscreen . maximized)
-		    ;;(frame-resize-pixelwise . t)))
+      (menu-bar-mode -1)
+      (scroll-bar-mode -1)
+      (show-paren-mode t)
+      (tool-bar-mode -1)
+      (tooltip-mode nil)
+      (global-display-line-numbers-mode t)
+      (setq display-line-numbers-type 'relative)
+      
+      ;; Resolve Tiling wm resize issue
+      (setq frame-resize-pixelwise t)
     #+END_SRC
 
 ** Backup files

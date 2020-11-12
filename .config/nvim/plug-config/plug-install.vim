@@ -13,7 +13,16 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'tpope/vim-commentary'
 
     " Autocompletion plugins
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    " language server
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'prabirshrestha/async.vim'
+    Plug 'mattn/vim-lsp-settings'
+
+    " auto completions
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
     " Colorscheme
     Plug 'chriskempson/base16-vim'
@@ -25,10 +34,14 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     " Vim movements
     Plug 'unblevable/quick-scope'
-    Plug 'justinmk/vim-sneak'
+    "Plug 'justinmk/vim-sneak'
     Plug 'liuchengxu/vim-which-key'
 
     " FZF
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
+
+    " snippet
+    Plug 'hrsh7th/vim-vsnip'
+    Plug 'hrsh7th/vim-vsnip-integ'
 call plug#end()

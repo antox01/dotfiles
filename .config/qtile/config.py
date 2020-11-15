@@ -46,8 +46,18 @@ keys = [
     Key([mod], "j", lazy.layout.up()),
 
     # Only for monadtall layout
-    Key([mod], "l", lazy.layout.shrink()),
-    Key([mod], "h", lazy.layout.grow()),
+    Key([mod], "h",
+        lazy.layout.grow_left(),
+        lazy.layout.shrink(),
+        lazy.layout.decrease_ratio(),
+        lazy.layout.add()
+        ),
+    Key([mod], "l",
+        lazy.layout.grow(),
+        lazy.layout.grow_right(),
+        lazy.layout.increase_ratio(),
+        lazy.layout.delete()
+        ),
 
     # Move windows up or down in current stack
     Key([mod, "shift"], "k", lazy.layout.shuffle_down(), desc="Move the focused window down in the stack"),

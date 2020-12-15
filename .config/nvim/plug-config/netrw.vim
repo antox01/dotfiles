@@ -65,15 +65,6 @@ endfunction
 " Close Netrw if it's the only buffer open
 autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
 
-augroup ProjectDrawer
-    autocmd!
-    " Don't open Netrw for this files
-    autocmd VimEnter */.git/COMMIT_EDITMSG let b:noNetrw=1
-
-    " For any other files or folder Netrw will be opened
-    autocmd VimEnter * :call NetrwOnBufferOpen()
-augroup END
-
 let g:NetrwIsOpen=0
 
 " Mapping the Netrw toggle keys

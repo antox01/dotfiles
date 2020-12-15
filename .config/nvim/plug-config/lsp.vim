@@ -1,4 +1,5 @@
 "let g:lsp_diagnostics_float_cursor = 1 
+let g:lsp_highlights_enabled = 0	" disable highlights on diagnostics
 let g:lsp_signs_enabled = 1	" enable signs
 let g:lsp_signs_error = {'text': '✗'}
 let g:lsp_signs_warning = {'text': '‼'}

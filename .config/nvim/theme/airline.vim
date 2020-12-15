@@ -1,7 +1,7 @@
 let g:airline#extensions#wordcount#enable = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 
-let g:airline_extensions = ['branch', 'hunks', 'lsp']
+let g:airline_extensions = ['branch', 'lsp']
 
 let g:airline#extensions#tabline#buffers_label = ''
 let g:airline#extensions#tabline#tabs_label = ''

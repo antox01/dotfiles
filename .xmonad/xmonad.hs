@@ -1,15 +1,7 @@
---
--- xmonad example config file.
---
--- A template showing all available configuration hooks,
--- and how to override the defaults in your own xmonad.hs conf file.
---
--- Normally, you'd only override those defaults you care about.
---
-
 import XMonad
 import Data.Monoid
 import System.Exit
+import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
@@ -20,7 +12,7 @@ import qualified Data.Map        as M
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "termite"
+myTerminal      = "st"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -54,8 +46,8 @@ myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#dddddd"
-myFocusedBorderColor = "#ff0000"
+myNormalBorderColor  = "#d0d0d0"
+myFocusedBorderColor = "#ac4142"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -63,16 +55,13 @@ myFocusedBorderColor = "#ff0000"
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
-    [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+    [ ((modm, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run")
-
-    -- launch gmrun
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
+    , ((modm,               xK_d     ), spawn "dmenu_run")
 
     -- close focused window
-    , ((modm .|. shiftMask, xK_c     ), kill)
+    , ((modm,               xK_q     ), kill)
 
      -- Rotate through the available layout algorithms
     , ((modm,               xK_space ), sendMessage NextLayout)
@@ -96,7 +85,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_m     ), windows W.focusMaster  )
 
     -- Swap the focused window and the master window
-    , ((modm,               xK_Return), windows W.swapMaster)
+    , ((modm .|. shiftMask,               xK_Return), windows W.swapMaster)
 
     -- Swap the focused window with the next window
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
@@ -129,7 +118,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
     -- Restart xmonad
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+    , ((modm .|. shiftMask, xK_r     ), spawn "xmonad --recompile; xmonad --restart")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
@@ -142,16 +131,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --
     [((m .|. modm, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    ++
+        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
+        ]
+    -- ++
 
     --
     -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
-    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    -- [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+    --     | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+    --     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 
 ------------------------------------------------------------------------
@@ -228,7 +218,7 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = mempty
+myEventHook = docksEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -236,8 +226,7 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook = return ()
-
+--myLogHook = return ()
 ------------------------------------------------------------------------
 -- Startup hook
 
@@ -250,6 +239,7 @@ myStartupHook = do
         spawnOnce "nitrogen --restore &"
         spawnOnce "picom &"
         spawnOnce "nm-applet &"
+        spawnOnce "xsetroot -cursor_name left_ptr"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -258,15 +248,7 @@ myStartupHook = do
 --
 main = do
     xmproc <- spawnPipe "xmobar ~/.config/xmobar/xmobar.config"
-    xmonad $ docks defaults
-
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
-defaults = def {
+    xmonad $ def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -283,18 +265,65 @@ defaults = def {
 
       -- hooks, layouts
         layoutHook         = myLayout,
-        manageHook         = myManageHook,
+        --manageHook         = myManageHook,
         handleEventHook    = myEventHook,
-        logHook            = myLogHook,
+        --logHook            = myLogHook,
+     -- this adds Xmobar to Xmonad
+        logHook = dynamicLogWithPP $
+                    xmobarPP {
+                            ppOutput = hPutStrLn xmproc
+                            },
+
+    -- this adds a second fixup for docks
+        manageHook = manageDocks <+> manageHook def,
         startupHook        = myStartupHook
     }
+
+--docks defaults
+
+-- A structure containing your configuration settings, overriding
+-- fields in the default config. Any you don't override, will
+-- use the defaults defined in xmonad/XMonad/Config.hs
+--
+-- No need to modify this.
+--
+--defaults = def {
+--      -- simple stuff
+--        terminal           = myTerminal,
+--        focusFollowsMouse  = myFocusFollowsMouse,
+--        clickJustFocuses   = myClickJustFocuses,
+--        borderWidth        = myBorderWidth,
+--        modMask            = myModMask,
+--        workspaces         = myWorkspaces,
+--        normalBorderColor  = myNormalBorderColor,
+--        focusedBorderColor = myFocusedBorderColor,
+--
+--      -- key bindings
+--        keys               = myKeys,
+--        mouseBindings      = myMouseBindings,
+--
+--      -- hooks, layouts
+--        layoutHook         = myLayout,
+--        --manageHook         = myManageHook,
+--        handleEventHook    = myEventHook,
+--        --logHook            = myLogHook,
+--     -- this adds Xmobar to Xmonad
+----        logHook = dynamicLogWithPP $
+----                    xmobarPP {
+----                            ppOutput = hPutStrLn xmproc
+----                            },
+----
+--    -- this adds a second fixup for docks
+--        manageHook = manageDocks <+> manageHook def,
+--        startupHook        = myStartupHook
+--    }
 
 -- | Finally, a copy of the default bindings in simple textual tabular format.
 help :: String
 help = unlines ["The default modifier key is 'alt'. Default keybindings:",
     "",
     "-- launching and killing programs",
-    "mod-Shift-Enter  Launch xterminal",
+    "mod-Enter  Launch xterminal",
     "mod-p            Launch dmenu",
     "mod-Shift-p      Launch gmrun",
     "mod-Shift-c      Close/kill the focused window",
@@ -310,7 +339,7 @@ help = unlines ["The default modifier key is 'alt'. Default keybindings:",
     "mod-m          Move focus to the master window",
     "",
     "-- modifying the window order",
-    "mod-Return   Swap the focused window and the master window",
+    "mod-Shift-Return   Swap the focused window and the master window",
     "mod-Shift-j  Swap the focused window with the next window",
     "mod-Shift-k  Swap the focused window with the previous window",
     "",

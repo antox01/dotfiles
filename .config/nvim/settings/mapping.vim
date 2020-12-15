@@ -8,3 +8,7 @@ nnoremap <C-h> <C-w>h
 imap jk <ESC>
 " Remap ESC to jj
 imap jj <ESC>
+
+
+" Terminal remapping
+tnoremap <Esc> <C-\><C-n>

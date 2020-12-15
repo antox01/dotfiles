@@ -8,6 +8,9 @@
    Disable all the bar present in emacs and adding the line number
 
     #+BEGIN_SRC emacs-lisp
+      (defvar efs/default-font-size 100)
+      (defvar efs/default-variable-font-size 100)
+
       (menu-bar-mode -1)
       (scroll-bar-mode -1)
       (show-paren-mode t)
@@ -15,9 +18,11 @@
       (tooltip-mode nil)
       (global-display-line-numbers-mode t)
       (setq display-line-numbers-type 'relative)
-      
+
       ;; Resolve Tiling wm resize issue
       (setq frame-resize-pixelwise t)
+
+      (set-face-attribute 'default nil :font "UbuntuMono Nerd Font" :height efs/default-font-size)
     #+END_SRC
 
 ** Backup files
@@ -33,6 +38,16 @@
 	 (load-theme 'base16-default-dark t)
 	 :ensure t)
  #+END_SRC
+
+** Doom-modeline
+   #+BEGIN_SRC emacs-lisp
+     (use-package doom-modeline
+	 :init (doom-modeline-mode 1)
+	 :custom (
+		  (doom-modeline-height 15)
+		  (doom-modeline-window-width-limit fill-column)
+		  (doom-modeline-icon (display-graphic-p))))
+   #+END_SRC
 
 * Evil-mode
     #+BEGIN_SRC emacs-lisp
@@ -80,10 +95,10 @@
 * Key-chord
   Enable delayed keypressing in the editor
 #+BEGIN_SRC emacs-lisp
-    (setq key-chord-two-keys-delay 0.5)
-    (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
-    (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
-    (key-chord-mode 1)
+  ;; (setq key-chord-two-keys-delay 0.5)
+  ;; (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
+  ;; (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+  ;; (key-chord-mode 1)
 #+END_SRC
 * Magit
     #+BEGIN_SRC emacs-lisp
@@ -184,11 +199,11 @@ Company documentation for selected item
    
 ** Start autocompletion
    #+BEGIN_SRC emacs-lisp
-    (with-eval-after-load 'company
-	(add-hook 'c++-mode-hook 'company-mode)
-	(add-hook 'c-mode-hook 'company-mode)
-	(add-hook 'python-mode-hook 'company-mode)
-	(add-hook 'emacs-lisp-mode-hook 'company-mode))
+     (with-eval-after-load 'company
+	 (add-hook 'c++-mode-hook 'company-mode)
+	 (add-hook 'c-mode-hook 'company-mode)
+	 (add-hook 'python-mode-hook 'company-mode)
+	 (add-hook 'emacs-lisp-mode-hook 'company-mode))
    #+END_SRC
 
 ** Autopair
@@ -233,6 +248,15 @@ Company documentation for selected item
 #+END_SRC
 
 * Org-mode
+** Org-bullets
+   #+BEGIN_SRC emacs-lisp
+     (use-package org-bullets
+       :after org
+       :hook (org-mode . org-bullets-mode)
+       :custom
+       (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+   #+END_SRC
+
 ** Evil-org
   Evil-mode integration for org-mode
     #+BEGIN_SRC emacs-lisp

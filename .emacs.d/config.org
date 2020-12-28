@@ -40,10 +40,9 @@
     
 ** Theme
  #+BEGIN_SRC emacs-lisp
-     (use-package doom-themes
-	 :config
-	 (load-theme 'base16-default-dark t)
-	 :ensure t)
+     (use-package base16-theme
+	 :init
+	 (load-theme 'base16-default-dark t))
  #+END_SRC
 
 ** Doom-modeline
@@ -61,23 +60,25 @@
 * Evil-mode
     #+BEGIN_SRC emacs-lisp
       (use-package evil
-	  :ensure t)
-      (evil-mode 1)
+	:init
+	(setq evil-want-integration t)
+	(setq evil-want-keybinding nil)
+	(setq evil-want-C-u-scroll t)
+	:config
+	(evil-mode 1)
+	(evil-define-key 'insert 'global (kbd "C-g") 'evil-normal-state)
+	)
 
-      ;; (use-package evil-leader
-      ;;     :ensure t
-      ;;     :config
-      ;;     (global-evil-leader-mode)
-      ;;     (evil-leader/set-leader (kbd "SPC"))
-      ;;     (evil-leader/set-key "f" 'helm-find-files)
-      ;; )
+      (use-package evil-collection
+	:after evil
+	:config
+	(evil-collection-init))
 
       (use-package evil-quickscope
 	:ensure t
 	:config
 	(global-evil-quickscope-mode 1))
 
-      (evil-define-key 'insert 'global (kbd "C-g") 'evil-normal-state)
 
       (evil-set-leader 'normal (kbd "SPC"))
       (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
@@ -115,11 +116,6 @@
     #+BEGIN_SRC emacs-lisp
       (use-package magit
 	  :ensure t)
-
-      (use-package evil-magit
-	  :ensure t
-	  :config
-	  (setq evil-magit-state 'normal))
     #+END_SRC
 
 * Helm
@@ -303,18 +299,3 @@ Company documentation for selected item
        :custom
        (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
    #+END_SRC
-
-** Evil-org
-  Evil-mode integration for org-mode
-    #+BEGIN_SRC emacs-lisp
-    (use-package evil-org
-	:ensure t
-	:after org
-	:config
-	(add-hook 'org-mode-hook 'evil-org-mode)
-	(add-hook 'evil-org-mode-hook
-	    (lambda ()
-		(evil-org-set-key-theme)))
-    )
-    #+END_SRC
-

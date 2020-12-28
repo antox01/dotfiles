@@ -19,6 +19,13 @@
       (global-display-line-numbers-mode t)
       (setq display-line-numbers-type 'relative)
 
+      ;; Disable line numbers for some modes
+      (dolist (mode '(org-mode-hook
+		      helm-mode-hook
+		      term-mode-hook
+		      eshell-mode-hook))
+	(add-hook mode (lambda () (display-line-numbers-mode 0))))
+
       ;; Resolve Tiling wm resize issue
       (setq frame-resize-pixelwise t)
 
@@ -41,6 +48,8 @@
 
 ** Doom-modeline
    #+BEGIN_SRC emacs-lisp
+     (use-package all-the-icons)
+     
      (use-package doom-modeline
 	 :init (doom-modeline-mode 1)
 	 :custom (
@@ -67,6 +76,8 @@
 	:ensure t
 	:config
 	(global-evil-quickscope-mode 1))
+
+      (evil-define-key 'insert 'global (kbd "C-g") 'evil-normal-state)
 
       (evil-set-leader 'normal (kbd "SPC"))
       (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
@@ -113,15 +124,51 @@
 
 * Helm
 #+BEGIN_SRC emacs-lisp
-    (use-package helm
-	:ensure t)
-    (require 'helm-config)
-    (setq helm-split-window-in-side-p t
-	helm-move-to-line-cycle-in-source t)
+  (use-package helm
+      :ensure t)
+  (require 'helm-config)
+  (setq helm-split-window-in-side-p t
+      helm-move-to-line-cycle-in-source t)
 
-    (helm-mode 1)
-    (global-set-key (kbd "M-x") 'helm-M-x)
-    (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  (helm-mode 1)
+  ;; (global-set-key (kbd "M-x") 'helm-M-x)
+  ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
+#+END_SRC
+
+* Ivy
+#+BEGIN_SRC emacs-lisp
+  (use-package ivy
+    :diminish
+    :bind (("C-s" . swiper)
+	   :map ivy-minibuffer-map
+	   ("TAB" . ivy-alt-done)
+	   ("C-l" . ivy-alt-done)
+	   ("C-j" . ivy-next-line)
+	   ("C-k" . ivy-previous-line)
+	   :map ivy-switch-buffer-map
+	   ("C-k" . ivy-previous-line)
+	   ("C-l" . ivy-done)
+	   ("C-d" . ivy-switch-buffer-kill)
+	   :map ivy-reverse-i-search-map
+	   ("C-k" . ivy-previous-line)
+	   ("C-d" . ivy-reverse-i-search-kill))
+    :config
+    (ivy-mode 1))
+
+  (use-package swiper)
+
+  (use-package ivy-rich
+    :init
+    (ivy-rich-mode 1))
+
+  (use-package counsel
+    :bind (("C-M-j" . 'counsel-switch-buffer)
+	   :map minibuffer-local-map
+	   ("C-r" . 'counsel-minibuffer-history))
+    :custom
+    (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
+    :config
+    (counsel-mode 1))
 #+END_SRC
 
 * Which-key
@@ -189,12 +236,12 @@ Company documentation for selected item
 
 ** Eldoc
    #+BEGIN_SRC emacs-lisp
-   (use-package eldoc
-   :ensure t
-   :config
-   (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-   (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
-   (add-hook 'ielm-mode-hook 'eldoc-mode))
+     (use-package eldoc
+     :ensure t
+     :config
+     (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+     (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
+     (add-hook 'ielm-mode-hook 'eldoc-mode))
    #+END_SRC
    
 ** Start autocompletion

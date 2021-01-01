@@ -134,6 +134,8 @@
 	"wj" 'evil-window-down
 	"wk" 'evil-window-up
 	"wl" 'evil-window-right
+	
+	"p" 'projectile-command-map
 
 	"h" 'help-command)
     #+END_SRC
@@ -215,6 +217,17 @@
 #+END_SRC
 
 * Programming
+** Projectile
+   #+BEGIN_SRC emacs-lisp
+     (use-package projectile
+       :diminish projectile-mode
+       :config (projectile-mode)
+       :init
+       (when (file-directory-p "~/source/projects")
+	 (setq projectile-project-search-path '("~/source/projects")))
+       (setq projectile-switch-project-action #'projectile-dired))
+   #+END_SRC
+
 ** Company
 #+BEGIN_SRC emacs-lisp
     (use-package company
@@ -234,16 +247,16 @@
 ** Company-quickhelp
 Company documentation for selected item
     #+BEGIN_SRC emacs-lisp
-    (use-package company-quickhelp
-    :ensure t
-    )
-    (company-quickhelp-mode)
+      (use-package company-quickhelp
+	:ensure t
+      )
+      (company-quickhelp-mode)
     #+END_SRC
 
 ** Company-backends 
    #+BEGIN_SRC emacs-lisp
-   (require 'company)
-    (setq company-backends '(company-elisp))
+     (require 'company)
+     (setq company-backends '(company-elisp))
     #+END_SRC
 
 ** Eglot

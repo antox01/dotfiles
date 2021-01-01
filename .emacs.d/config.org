@@ -57,6 +57,16 @@
 		  (doom-modeline-icon (display-graphic-p))))
    #+END_SRC
 
+* General
+  #+BEGIN_SRC emacs-lisp
+    (use-package general
+      :config
+      (general-create-definer atx/leader-bind
+	:keymaps '(normal insert visual emacs)
+	:prefix "SPC"
+	:global-prefix "C-SPC"))
+  #+END_SRC
+
 * Evil-mode
     #+BEGIN_SRC emacs-lisp
       (use-package evil
@@ -80,28 +90,52 @@
 	(global-evil-quickscope-mode 1))
 
 
-      (evil-set-leader 'normal (kbd "SPC"))
-      (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
-      (evil-define-key 'normal 'global (kbd "<leader>ff") 'helm-find-files)
-      (evil-define-key 'normal 'global (kbd "<leader>fd") 'dired)
+      ;; (evil-set-leader 'normal (kbd "SPC"))
+      ;; (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
+      ;; (evil-define-key 'normal 'global (kbd "<leader>ff") 'helm-find-files)
+      ;; (evil-define-key 'normal 'global (kbd "<leader>fd") 'dired)
 
-      ;; Buffers specific keybinds
-      (evil-define-key 'normal 'global (kbd "<leader>bk") 'kill-buffer-and-window)
-      (evil-define-key 'normal 'global (kbd "<leader>bl") 'switch-to-buffer)
-      (evil-define-key 'normal 'global (kbd "<leader>bn") 'next-buffer)
-      (evil-define-key 'normal 'global (kbd "<leader>bp") 'previous-buffer)
+      ;; ;; Buffers specific keybinds
+      ;; (evil-define-key 'normal 'global (kbd "<leader>bk") 'kill-buffer-and-window)
+      ;; (evil-define-key 'normal 'global (kbd "<leader>bl") 'switch-to-buffer)
+      ;; (evil-define-key 'normal 'global (kbd "<leader>bn") 'next-buffer)
+      ;; (evil-define-key 'normal 'global (kbd "<leader>bp") 'previous-buffer)
 
-      ;; Window movements
-      (evil-define-key 'normal 'global (kbd "<leader>wq") 'evil-quit)
-      (evil-define-key 'normal 'global (kbd "<leader>wc") 'evil-window-delete)
-      (evil-define-key 'normal 'global (kbd "<leader>wb") 'split-window-below)
-      (evil-define-key 'normal 'global (kbd "<leader>wv") 'split-window-horizontally)
-      (evil-define-key 'normal 'global (kbd "<leader>wh") 'evil-window-left)
-      (evil-define-key 'normal 'global (kbd "<leader>wj") 'evil-window-down)
-      (evil-define-key 'normal 'global (kbd "<leader>wk") 'evil-window-top)
-      (evil-define-key 'normal 'global (kbd "<leader>wl") 'evil-window-right)
+      ;; ;; Window movements
+      ;; (evil-define-key 'normal 'global (kbd "<leader>wq") 'evil-quit)
+      ;; (evil-define-key 'normal 'global (kbd "<leader>wc") 'evil-window-delete)
+      ;; (evil-define-key 'normal 'global (kbd "<leader>wb") 'split-window-below)
+      ;; (evil-define-key 'normal 'global (kbd "<leader>wv") 'split-window-horizontally)
+      ;; (evil-define-key 'normal 'global (kbd "<leader>wh") 'evil-window-left)
+      ;; (evil-define-key 'normal 'global (kbd "<leader>wj") 'evil-window-down)
+      ;; (evil-define-key 'normal 'global (kbd "<leader>wk") 'evil-window-top)
+      ;; (evil-define-key 'normal 'global (kbd "<leader>wl") 'evil-window-right)
 
-      (evil-define-key 'normal 'global (kbd "<leader>h") 'help-command)
+      ;; (evil-define-key 'normal 'global (kbd "<leader>h") 'help-command)
+
+      (atx/leader-bind
+	"f" '(:ignore t :which-key "file")
+	"fs" 'save-buffer
+	"ff" 'helm-find-files
+	"fd" 'dired
+
+	"b" '(:ignore t :which-key "buffer")
+	"bk" 'kill-buffer-and-window
+	"bl" 'switch-to-buffer
+	"bn" 'next-buffer
+	"bp" 'previous-buffer
+
+	"w" '(:ignore t :which-key "window")
+	"wq" 'evil-quit
+	"wc" 'evil-window-delete
+	"wb" 'split-window-below
+	"wv" 'split-window-horizontally
+	"wh" 'evil-window-left
+	"wj" 'evil-window-down
+	"wk" 'evil-window-up
+	"wl" 'evil-window-right
+
+	"h" 'help-command)
     #+END_SRC
     
 * Key-chord
@@ -112,10 +146,14 @@
   ;; (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   ;; (key-chord-mode 1)
 #+END_SRC
+
 * Magit
     #+BEGIN_SRC emacs-lisp
-      (use-package magit
-	  :ensure t)
+      (use-package magit)
+
+      (atx/leader-bind
+	"g" '(:ignore t :which-key "magit")
+	"gs" 'magit-status)
     #+END_SRC
 
 * Helm

@@ -1,9 +1,23 @@
 #+TITLE: Emacs configuration
 #+DESCRIPTION: Org-mode based configuration
 #+LANGUAGE: en
-#+PROPERTY: results silent
+#+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
 
 * Basic configurations
+** Packages settings
+   #+BEGIN_SRC emacs-lisp
+     (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+			      ("org" . "https://orgmode.org/elpa/")
+			      ("melpa" . "https://melpa.org/packages/")))
+
+
+     (dolist (package '(use-package))
+	(unless (package-installed-p package)
+	    (package-install package)))
+     (require 'use-package)
+     (setq use-package-always-ensure t)
+   #+END_SRC
+
 ** Emacs Frame
    Disable all the bar present in emacs and adding the line number
 
@@ -34,15 +48,15 @@
 
 ** Backup files
     #+BEGIN_SRC emacs-lisp
-    (setq backup-directory-alist '(("." . "~/.local/share/emacs-saves")))
-    (setq backup-by-copying t)
+      (setq backup-directory-alist '(("." . "~/.local/share/emacs-saves")))
+      (setq backup-by-copying t)
     #+END_SRC
     
 ** Theme
- #+BEGIN_SRC emacs-lisp
-     (use-package base16-theme
-	 :init
-	 (load-theme 'base16-default-dark t))
+   #+BEGIN_SRC emacs-lisp
+   (use-package base16-theme
+       :init
+       (load-theme 'base16-default-dark t))
  #+END_SRC
 
 ** Doom-modeline
@@ -140,15 +154,6 @@
 	"h" 'help-command)
     #+END_SRC
     
-* Key-chord
-  Enable delayed keypressing in the editor
-#+BEGIN_SRC emacs-lisp
-  ;; (setq key-chord-two-keys-delay 0.5)
-  ;; (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
-  ;; (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
-  ;; (key-chord-mode 1)
-#+END_SRC
-
 * Magit
     #+BEGIN_SRC emacs-lisp
       (use-package magit)
@@ -159,7 +164,7 @@
     #+END_SRC
 
 * Helm
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (use-package helm
       :ensure t)
   (require 'helm-config)
@@ -172,49 +177,49 @@
 #+END_SRC
 
 * Ivy
-#+BEGIN_SRC emacs-lisp
-  (use-package ivy
-    :diminish
-    :bind (("C-s" . swiper)
-	   :map ivy-minibuffer-map
-	   ("TAB" . ivy-alt-done)
-	   ("C-l" . ivy-alt-done)
-	   ("C-j" . ivy-next-line)
-	   ("C-k" . ivy-previous-line)
-	   :map ivy-switch-buffer-map
-	   ("C-k" . ivy-previous-line)
-	   ("C-l" . ivy-done)
-	   ("C-d" . ivy-switch-buffer-kill)
-	   :map ivy-reverse-i-search-map
-	   ("C-k" . ivy-previous-line)
-	   ("C-d" . ivy-reverse-i-search-kill))
-    :config
-    (ivy-mode 1))
+  #+BEGIN_SRC emacs-lisp
+    (use-package ivy
+      :diminish
+      :bind (("C-s" . swiper)
+	     :map ivy-minibuffer-map
+	     ("TAB" . ivy-alt-done)
+	     ("C-l" . ivy-alt-done)
+	     ("C-j" . ivy-next-line)
+	     ("C-k" . ivy-previous-line)
+	     :map ivy-switch-buffer-map
+	     ("C-k" . ivy-previous-line)
+	     ("C-l" . ivy-done)
+	     ("C-d" . ivy-switch-buffer-kill)
+	     :map ivy-reverse-i-search-map
+	     ("C-k" . ivy-previous-line)
+	     ("C-d" . ivy-reverse-i-search-kill))
+      :config
+      (ivy-mode 1))
 
-  (use-package swiper)
+    (use-package swiper)
 
-  (use-package ivy-rich
-    :init
-    (ivy-rich-mode 1))
+    (use-package ivy-rich
+      :init
+      (ivy-rich-mode 1))
 
-  (use-package counsel
-    :bind (("C-M-j" . 'counsel-switch-buffer)
-	   :map minibuffer-local-map
-	   ("C-r" . 'counsel-minibuffer-history))
-    :custom
-    (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
-    :config
-    (counsel-mode 1))
-#+END_SRC
+    (use-package counsel
+      :bind (("C-M-j" . 'counsel-switch-buffer)
+	     :map minibuffer-local-map
+	     ("C-r" . 'counsel-minibuffer-history))
+      :custom
+      (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
+      :config
+      (counsel-mode 1))
+  #+END_SRC
 
 * Which-key
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
     (use-package which-key
 	:ensure t)
     (setq which-key-show-early-on-C-h t)
     (which-key-setup-side-window-bottom)
     (which-key-mode)
-#+END_SRC
+  #+END_SRC
 
 * Programming
 ** Projectile
@@ -229,35 +234,35 @@
    #+END_SRC
 
 ** Company
-#+BEGIN_SRC emacs-lisp
-    (use-package company
-	:ensure t
-	:config
-	(setq company-idle-delay 0)
-	(setq company-minimun-prefix-length 0)
-	
-	(define-key company-active-map (kbd "C-n") 'company-select-next)
-	(define-key company-active-map (kbd "C-p") 'company-select-previous)
-	(define-key company-search-map (kbd "C-n") 'company-select-next)
-	(define-key company-search-map (kbd "C-p") 'company-select-previous)
-	(define-key company-search-map (kbd "C-t") 'company-search-toggle-filtering)
-    )
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (use-package company
+	 :ensure t
+	 :config
+	 (setq company-idle-delay 0)
+	 (setq company-minimun-prefix-length 0)
+
+	 (define-key company-active-map (kbd "C-n") 'company-select-next)
+	 (define-key company-active-map (kbd "C-p") 'company-select-previous)
+	 (define-key company-search-map (kbd "C-n") 'company-select-next)
+	 (define-key company-search-map (kbd "C-p") 'company-select-previous)
+	 (define-key company-search-map (kbd "C-t") 'company-search-toggle-filtering)
+     )
+  #+END_SRC
 
 ** Company-quickhelp
-Company documentation for selected item
-    #+BEGIN_SRC emacs-lisp
-      (use-package company-quickhelp
-	:ensure t
-      )
-      (company-quickhelp-mode)
-    #+END_SRC
+   Company documentation for selected item
+   #+BEGIN_SRC emacs-lisp
+     (use-package company-quickhelp
+       :ensure t
+     )
+     (company-quickhelp-mode)
+   #+END_SRC
 
 ** Company-backends 
    #+BEGIN_SRC emacs-lisp
      (require 'company)
      (setq company-backends '(company-elisp))
-    #+END_SRC
+   #+END_SRC
 
 ** Eglot
    #+BEGIN_SRC emacs-lisp
@@ -284,11 +289,10 @@ Company documentation for selected item
 ** Eldoc
    #+BEGIN_SRC emacs-lisp
      (use-package eldoc
-     :ensure t
-     :config
-     (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-     (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
-     (add-hook 'ielm-mode-hook 'eldoc-mode))
+       :config
+       (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+       (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
+       (add-hook 'ielm-mode-hook 'eldoc-mode))
    #+END_SRC
    
 ** Start autocompletion
@@ -308,40 +312,47 @@ Company documentation for selected item
        (add-hook 'prog-mode-hook 'autopair-mode))
    #+END_SRC
 
-* Yasnippet 
+* Yasnippet
   #+BEGIN_SRC emacs-lisp
     (use-package yasnippet
-      :ensure t
       :config
       ;; (setq yas-snippet-dirs
       ;; 	'("~/.emacs.d/snippets"))
       (yas-global-mode 1))
 
-    (use-package yasnippet-snippets
-      :ensure t)
+    (use-package yasnippet-snippets)
   #+END_SRC
 
-* Try
-#+BEGIN_SRC emacs-lisp
-    (use-package try
-	:ensure t)
-#+END_SRC
-
 * Rainbow-mode
-#+BEGIN_SRC emacs-lisp
-  (use-package rainbow-mode
-      :ensure t)
-  (use-package rainbow-delimiters
-    :ensure t
-    :config
-    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
-  (use-package rainbow-identifiers
-    :ensure t
-    :config
-    (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
-#+END_SRC
+  #+BEGIN_SRC emacs-lisp
+    (use-package rainbow-mode
+	:ensure t)
+    (use-package rainbow-delimiters
+      :ensure t
+      :config
+      (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+    (use-package rainbow-identifiers
+      :ensure t
+      :config
+      (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
+  #+END_SRC
 
 * Org-mode
+  #+BEGIN_SRC emacs-lisp
+    (use-package org)
+
+  #+END_SRC
+** Auto-tangle config file
+   #+BEGIN_SRC emacs-lisp
+     (defun atx/tangle-config ()
+       (when (string-equal (file-name-directory (buffer-file-name))
+			   (expand-file-name user-emacs-directory))
+	 (let ((org-confirm-babel-evaluate nil))
+	   (org-babel-tangle))))
+
+     (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'atx/tangle-config)))
+   #+END_SRC
+   
 ** Org-bullets
    #+BEGIN_SRC emacs-lisp
      (use-package org-bullets

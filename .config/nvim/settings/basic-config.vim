@@ -23,7 +23,8 @@ set path+=**
 set wildmenu
 set wildmode=longest,list
 
-set completeopt=menuone,longest
+set completeopt=menuone,noinsert,noselect,longest
+set shortmess+=c
 
 " === TAB Settings === "
 set expandtab

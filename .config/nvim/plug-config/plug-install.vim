@@ -16,13 +16,16 @@ call plug#begin('~/.local/share/nvim/plugged')
     "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     " language server
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'prabirshrestha/async.vim'
-    Plug 'mattn/vim-lsp-settings'
+    " Plug 'prabirshrestha/vim-lsp'
+    " Plug 'prabirshrestha/async.vim'
+    " Plug 'mattn/vim-lsp-settings'
+    Plug 'neovim/nvim-lspconfig'
 
     " auto completions
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    " Plug 'prabirshrestha/asyncomplete.vim'
+    " Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    " Plug 'yami-beta/asyncomplete-omni.vim'
+    Plug 'nvim-lua/completion-nvim'
 
     " Colorscheme
     Plug 'chriskempson/base16-vim'

@@ -21,9 +21,9 @@ set noshowmode              " Vim won't show the current active mode
 
 set path+=**
 set wildmenu
-set wildmode=longest,list
+set wildmode=longest,full
 
-set completeopt=menuone,noinsert,noselect,longest
+set completeopt=menu,noinsert,longest
 set shortmess+=c
 
 " === TAB Settings === "

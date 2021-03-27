@@ -6,11 +6,10 @@ source ~/.config/nvim/theme/colorscheme.vim
 source ~/.config/nvim/theme/airline.vim
 
 " Importing plugins settings
-"source ~/.config/nvim/plug-config/coc-config.vim " Coc autocomplete settings
-" source ~/.config/nvim/plug-config/lsp.vim
-luafile ~/.config/nvim/plug-config/lsp.lua
+luafile ~/.config/nvim/lua/lsp.lua
+source ~/.config/nvim/plug-config/telescope.vim
 source ~/.config/nvim/plug-config/vsnip.vim
-source ~/.config/nvim/plug-config/fzf.vim
+"source ~/.config/nvim/plug-config/fzf.vim
 source ~/.config/nvim/plug-config/netrw.vim
 source ~/.config/nvim/plug-config/quickscope.vim
 "source ~/.config/nvim/plug-config/sneak.vim

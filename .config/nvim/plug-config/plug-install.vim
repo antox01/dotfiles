@@ -12,19 +12,10 @@ call plug#begin('~/.local/share/nvim/plugged')
     " Comments in vim
     Plug 'tpope/vim-commentary'
 
-    " Autocompletion plugins
-    "Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
     " language server
-    " Plug 'prabirshrestha/vim-lsp'
-    " Plug 'prabirshrestha/async.vim'
-    " Plug 'mattn/vim-lsp-settings'
     Plug 'neovim/nvim-lspconfig'
 
     " auto completions
-    " Plug 'prabirshrestha/asyncomplete.vim'
-    " Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    " Plug 'yami-beta/asyncomplete-omni.vim'
     Plug 'nvim-lua/completion-nvim'
 
     " Colorscheme
@@ -37,12 +28,18 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     " Vim movements
     Plug 'unblevable/quick-scope'
-    "Plug 'justinmk/vim-sneak'
     Plug 'liuchengxu/vim-which-key'
 
     " FZF
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+
+    " Tree-sitter support
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/playground'
 
     " snippet
     Plug 'hrsh7th/vim-vsnip'

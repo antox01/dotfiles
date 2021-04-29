@@ -40,6 +40,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     " Tree-sitter support
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/playground'
+    Plug 'preservim/tagbar'
 
     " snippet
     Plug 'hrsh7th/vim-vsnip'

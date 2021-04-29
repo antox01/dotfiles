@@ -7,6 +7,7 @@ source ~/.config/nvim/theme/airline.vim
 
 " Importing plugins settings
 luafile ~/.config/nvim/lua/lsp.lua
+luafile ~/.config/nvim/lua/treesitter.lua
 source ~/.config/nvim/plug-config/telescope.vim
 source ~/.config/nvim/plug-config/vsnip.vim
 "source ~/.config/nvim/plug-config/fzf.vim

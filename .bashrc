@@ -19,6 +19,10 @@ alias vim='nvim'
 alias sudo='sudo '
 alias s='sudo '
 
+alias tmux='tmux -f ~/.config/tmux/tmux.conf'
+
+alias prj='cd $(fzfdir ~/source/projects)'
+
 # Git alias
 alias git='LANG=en_GB git ' # Alias to set the default language of git
 alias ga='git add '
@@ -28,10 +32,6 @@ alias gp='git push '
 alias gb='git branch '
 alias gf='git fetch '
 alias gst='git status '
-
-export EDITOR=nvim
-export TERM=xterm-termite
-export STARSHIP_CONFIG=~/.config/starship/config.toml
 
 # get fastest mirrors
 alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
@@ -56,5 +56,3 @@ eval "$(starship init bash)"
 
 # Activating the vi mode in bash
 set -o vi
-
-neofetch

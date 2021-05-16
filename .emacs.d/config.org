@@ -130,7 +130,7 @@
       (atx/leader-bind
 	"f" '(:ignore t :which-key "file")
 	"fs" 'save-buffer
-	"ff" 'helm-find-files
+	"." '(find-file :which-key "find")
 	"fd" 'dired
 
 	"b" '(:ignore t :which-key "buffer")
@@ -148,7 +148,7 @@
 	"wj" 'evil-window-down
 	"wk" 'evil-window-up
 	"wl" 'evil-window-right
-	
+
 	"p" 'projectile-command-map
 
 	"h" 'help-command)
@@ -222,6 +222,7 @@
   #+END_SRC
 
 * Programming
+  This section contains all the package and configurations I use for programming.
 ** Projectile
    #+BEGIN_SRC emacs-lisp
      (use-package projectile
@@ -233,76 +234,52 @@
        (setq projectile-switch-project-action #'projectile-dired))
    #+END_SRC
 
+** Lsp-mode
+   #+BEGIN_SRC emacs-lisp
+     (defun atx/lsp-setup ()
+       (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+       (lsp-headerline-breadcrumb-mode))
+
+     (use-package lsp-mode
+       :commands (lsp lsp-deferred)
+       :hook ((python-mode . lsp)
+	      (c-mode . lsp)
+	      (c++-mode .lsp)
+	      (lsp-mode . atx/lsp-setup))
+       :init
+       (setq lsp-keymap-prefix "C-c l")
+       :config
+       (lsp-enable-which-key-integration t)
+       (setq lsp-idle-delay 0.1))
+   #+END_SRC
+   
 ** Company
    #+BEGIN_SRC emacs-lisp
      (use-package company
-	 :ensure t
-	 :config
-	 (setq company-idle-delay 0)
-	 (setq company-minimun-prefix-length 0)
+       ;; :after lsp-mode
+       :hook (prog-mode . company-mode)
+       :bind (:map company-active-map
+		   ("<tab>" . company-complete-selection))
+	     (:map company-active-map
+		   ("C-n" . company-select-next))
+	     (:map company-active-map
+		   ("C-p" . company-select-previous))
+	     (:map company-active-map
+		   ("C-n" . company-select-next))
+	     (:map company-active-map
+		   ("C-p" . company-select-previous))
+	     (:map company-active-map
+		   ("C-t" . company-search-toggle-filtering))
+	     ;; (:map lsp-mode-map
+	     ;;       ("<tab>" . company-indent-or-complete-common))
 
-	 (define-key company-active-map (kbd "C-n") 'company-select-next)
-	 (define-key company-active-map (kbd "C-p") 'company-select-previous)
-	 (define-key company-search-map (kbd "C-n") 'company-select-next)
-	 (define-key company-search-map (kbd "C-p") 'company-select-previous)
-	 (define-key company-search-map (kbd "C-t") 'company-search-toggle-filtering)
-     )
+       :custom
+       (company-minimum-prefix-length 1)
+       (company-idle-delay 0.0))
+
+     (use-package company-box
+       :hook (company-mode . company-box-mode))
   #+END_SRC
-
-** Company-quickhelp
-   Company documentation for selected item
-   #+BEGIN_SRC emacs-lisp
-     (use-package company-quickhelp
-       :ensure t
-     )
-     (company-quickhelp-mode)
-   #+END_SRC
-
-** Company-backends 
-   #+BEGIN_SRC emacs-lisp
-     (require 'company)
-     (setq company-backends '(company-elisp))
-   #+END_SRC
-
-** Eglot
-   #+BEGIN_SRC emacs-lisp
-     (use-package eglot
-       :ensure t
-       :config
-       (add-to-list 'eglot-server-programs `((c++-mode c-mode) "clangd"))
-       (add-to-list 'eglot-server-programs
-		    `(python-mode . ("pyls" "-v" "--tcp" "--host"
-				     "localhost" "--port" :autoport)))
-       (add-hook 'c++-mode-hook 'eglot-ensure)
-       (add-hook 'c-mode-hook 'eglot-ensure)
-       (add-hook 'python-mode-hook 'eglot-ensure))
-   #+END_SRC
-
-** Flycheck
-   #+BEGIN_SRC emacs-lisp
-     ;; (use-package flycheck
-     ;; :ensure t
-     ;; :config
-     ;; (global-flycheck-mode))
-   #+END_SRC
-
-** Eldoc
-   #+BEGIN_SRC emacs-lisp
-     (use-package eldoc
-       :config
-       (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-       (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
-       (add-hook 'ielm-mode-hook 'eldoc-mode))
-   #+END_SRC
-   
-** Start autocompletion
-   #+BEGIN_SRC emacs-lisp
-     (with-eval-after-load 'company
-	 (add-hook 'c++-mode-hook 'company-mode)
-	 (add-hook 'c-mode-hook 'company-mode)
-	 (add-hook 'python-mode-hook 'company-mode)
-	 (add-hook 'emacs-lisp-mode-hook 'company-mode))
-   #+END_SRC
 
 ** Autopair
    #+BEGIN_SRC emacs-lisp

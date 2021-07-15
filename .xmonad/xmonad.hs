@@ -2,6 +2,7 @@ import XMonad
 import Data.Monoid
 import System.Exit
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.WorkspaceHistory
 import XMonad.Hooks.SetWMName
@@ -250,7 +251,7 @@ myEventHook = docksEventHook
 myStartupHook = do
         spawnOnce "nitrogen --restore &"
         spawnOnce "picom &"
-        spawnOnce "nm-applet &"
+        -- spawnOnce "nm-applet &"
         spawnOnce "xsetroot -cursor_name left_ptr"
         setWMName "LG3D"
 
@@ -261,7 +262,7 @@ myStartupHook = do
 --
 main = do
     xmproc <- spawnPipe "xmobar ~/.config/xmobar/xmobar.config"
-    xmonad $ def {
+    xmonad $ ewmh def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -278,7 +279,7 @@ main = do
       -- hooks, layouts
         layoutHook         = myLayout,
         --manageHook         = myManageHook,
-        handleEventHook    = myEventHook,
+        handleEventHook    = myEventHook <+> fullscreenEventHook,
         --logHook            = myLogHook,
      -- this adds Xmobar to Xmonad
         logHook = workspaceHistoryHook <+> dynamicLogWithPP xmobarPP {
